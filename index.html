@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <title>CUTZO - Book Barber Shops Near You</title>
+
+    <!-- Content Security Policy — restricts script injection and network targets -->
+    <meta http-equiv="Content-Security-Policy" content="
+      default-src 'self' capacitor: http://localhost:*;
+      script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.convex.cloud https://*.googleapis.com https://*.firebase.com https://apis.google.com capacitor: http://localhost:*;
+      style-src 'self' 'unsafe-inline' https://fonts.googleapis.com capacitor: http://localhost:*;
+      font-src 'self' https://fonts.gstatic.com capacitor: http://localhost:*;
+      img-src 'self' data: blob: https://*.convex.cloud https://*.firebase.com https://*.googleusercontent.com https://images.unsplash.com capacitor: http://localhost:*;
+      connect-src 'self' https://*.convex.cloud wss://*.convex.cloud https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://*.googleapis.com https://*.firebase.com capacitor: http://localhost:*;
+      frame-src 'self' https://*.firebaseapp.com https://*.firebase.com;
+    " />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="CUTZO" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="icons/icon-192.webp" />
+
+    <meta property="og:title" content="CUTZO" />
+    <meta
+      property="og:description"
+      content="Find nearby barber shops, view trusted reviews, and book instantly with CUTZO."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="icons/icon-512.webp" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="CUTZO" />
+    <meta
+      name="twitter:description"
+      content="Book barber shops near you with fixed pricing, quick slot selection, and trusted reviews."
+    />
+    <meta name="twitter:image" content="icons/icon-512.webp" />
+
+    <script>
+      window.onerror = function(msg, url, line, col, error) {
+        var out = document.createElement('div');
+        out.style.cssText = 'background:red;color:white;position:fixed;top:0;left:0;right:0;bottom:0;z-index:99999;padding:20px;overflow:auto;font-family:monospace;font-size:14px;';
+        out.innerHTML = '<h2>Runtime Error</h2>' +
+          '<p><b>Message:</b> ' + msg + '</p>' +
+          '<p><b>URL:</b> ' + url + '</p>' +
+          '<p><b>Line:</b> ' + line + ', <b>Col:</b> ' + col + '</p>' +
+          '<pre>' + (error && error.stack || 'No stack trace') + '</pre>' +
+          '<button onclick="location.reload()" style="padding:10px;margin-top:20px;">Reload App</button>';
+        document.body.appendChild(out);
+        return false;
+      };
+    </script>
+    <style>
+      /* Eliminate white/color flash while JS parses and React mounts.
+         Must match the exact start color of the splash screen gradient. */
+      html, body {
+        background-color: #12002E;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+      #root {
+        background-color: #12002E;
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="src/main.tsx"></script>
+  </body>
+</html>
+
