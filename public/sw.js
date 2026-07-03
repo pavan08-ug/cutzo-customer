@@ -1,5 +1,6 @@
 const VERSION = "cutzo-v" + "__BUILD_DATE__";
-const APP_SHELL = ["/", "/manifest.webmanifest", "/pwa-192.png", "/pwa-512.png", "/apple-touch-icon.png"];
+const APP_SHELL = ["/", "/manifest.webmanifest", "/favicon.ico", "/apple-touch-icon.png", "/icons/icon-192.webp", "/icons/icon-512.webp"];
+
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
