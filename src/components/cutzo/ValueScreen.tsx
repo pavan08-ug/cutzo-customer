@@ -172,25 +172,16 @@ export default function ValueScreen({ onGetStarted, onOpenVendor }: Props) {
               boxShadow: "0 10px 30px rgba(143,0,255,0.3), inset 0 1px 0 rgba(255,255,255,0.2)",
             }}
           >
-            {/* Animated Z Icon Logo */}
+            {/* Brand Icon */}
             <motion.div
               animate={{ rotate: [0, -3, 0, 3, 0] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
             >
-              <svg width="44" height="44" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                  <mask id="cutMaskSmall">
-                    <rect width="1024" height="1024" fill="white" />
-                    {/* Scaled slash for better visibility at 44px */}
-                    <path d="M 80 940 Q 512 650 860 160 L 800 140 Q 512 600 60 900 Z" fill="black" />
-                  </mask>
-                </defs>
-                <g mask="url(#cutMaskSmall)">
-                  <path d="M 280 340 L 744 340" stroke="white" stroke-width="160" stroke-linecap="round" />
-                  <path d="M 744 340 L 280 684" stroke="white" stroke-width="160" stroke-linejoin="miter" />
-                  <path d="M 280 684 L 744 684" stroke="white" stroke-width="160" stroke-linecap="round" />
-                </g>
-              </svg>
+              <img 
+                src="/icon.svg" 
+                alt="Cutzo Logo" 
+                className="h-[52px] w-[52px] object-contain rounded-xl" 
+              />
             </motion.div>
           </div>
         </motion.div>
