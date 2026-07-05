@@ -77,11 +77,11 @@ export default function SplashScreen() {
           initial={{ scale: 0, opacity: 0, y: 20 }}
           animate={{ scale: 1, opacity: 1, y: 0 }}
           transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-          className="relative mb-4"
+          className="relative mb-6 sm:mb-8"
         >
           {/* Brand icon — full Cutzo logo */}
           <CutzoLogoIcon
-            className="w-[280px]"
+            className="w-[320px] sm:w-[400px] md:w-[480px] lg:w-[560px] max-w-[85vw]"
           />
         </motion.div>
 

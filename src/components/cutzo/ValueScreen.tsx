@@ -141,17 +141,17 @@ export default function ValueScreen({ onGetStarted, onOpenVendor }: Props) {
       {/* ── Center hero content ───────────────────────────────────────────── */}
       <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-7 text-center" style={{ paddingBottom: "140px" }}>
 
-        {/* Brand logo from splash.svg */}
+        {/* Brand logo from logo-dark.png */}
         <motion.div
           initial={{ scale: 0, opacity: 0, y: 20 }}
           animate={{ scale: 1, opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-          className="mb-8 relative"
+          className="mb-6 sm:mb-8 md:mb-10 relative"
         >
           <img 
             src="/logo-dark.png" 
             alt="Cutzo Logo" 
-            className="w-[220px] object-contain" 
+            className="w-[260px] sm:w-[340px] md:w-[420px] lg:w-[480px] max-w-[85vw] object-contain" 
           />
         </motion.div>
 
