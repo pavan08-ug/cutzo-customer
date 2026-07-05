@@ -141,49 +141,18 @@ export default function ValueScreen({ onGetStarted, onOpenVendor }: Props) {
       {/* ── Center hero content ───────────────────────────────────────────── */}
       <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-7 text-center" style={{ paddingBottom: "140px" }}>
 
-        {/* Animated icon */}
+        {/* Brand logo from splash.svg */}
         <motion.div
-          initial={{ scale: 0, opacity: 0, rotate: -20 }}
-          animate={{ scale: 1, opacity: 1, rotate: 0 }}
+          initial={{ scale: 0, opacity: 0, y: 20 }}
+          animate={{ scale: 1, opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
           className="mb-8 relative"
         >
-          {/* Outer glow ring 1 */}
-          <motion.div
-            className="absolute -inset-6 rounded-[36px]"
-            style={{ background: "radial-gradient(circle, rgba(143,0,255,0.35) 0%, transparent 65%)" }}
-            animate={{ scale: [1, 1.3, 1], opacity: [0.5, 1, 0.5] }}
-            transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+          <img 
+            src="/splash.svg" 
+            alt="Cutzo Logo" 
+            className="w-[220px] object-contain" 
           />
-          {/* Outer glow ring 2 */}
-          <motion.div
-            className="absolute -inset-10 rounded-[44px]"
-            style={{ background: "radial-gradient(circle, rgba(180,80,255,0.15) 0%, transparent 65%)" }}
-            animate={{ scale: [1, 1.25, 1], opacity: [0.3, 0.7, 0.3] }}
-            transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-          />
-
-          {/* Glass card background */}
-          <div
-            className="relative flex h-[85px] w-[85px] items-center justify-center rounded-[24px]"
-            style={{
-              background: "linear-gradient(145deg, rgba(143,0,255,0.6) 0%, rgba(75,0,181,0.8) 100%)",
-              border: "1px solid rgba(255,255,255,0.15)",
-              boxShadow: "0 10px 30px rgba(143,0,255,0.3), inset 0 1px 0 rgba(255,255,255,0.2)",
-            }}
-          >
-            {/* Brand Icon */}
-            <motion.div
-              animate={{ rotate: [0, -3, 0, 3, 0] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-            >
-              <img 
-                src="/icon.svg" 
-                alt="Cutzo Logo" 
-                className="h-[52px] w-[52px] object-contain rounded-xl" 
-              />
-            </motion.div>
-          </div>
         </motion.div>
 
         {/* Headline */}
