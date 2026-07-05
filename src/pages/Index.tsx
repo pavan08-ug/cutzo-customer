@@ -162,6 +162,8 @@ const screenToPath = (screen: Screen, selectedShopId?: string): string => {
       return "/profile/notifications";
     case "privacy":
       return "/privacy";
+    case "terms":
+      return "/terms";
     case "help":
       return "/help";
     case "about":
@@ -198,6 +200,7 @@ const getScreenFromPath = (path: string, completedSplash: boolean, completedSpla
   if (path === "/profile/info") return "personalInfo";
   if (path === "/profile/notifications") return "notifications";
   if (path === "/privacy") return "privacy";
+  if (path === "/terms") return "terms";
   if (path === "/help") return "help";
   if (path === "/about") return "about";
   if (path === "/how-it-works") return "howItWorks";
