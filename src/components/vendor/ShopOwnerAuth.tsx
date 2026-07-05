@@ -31,6 +31,7 @@ import {
 } from "./storage";
 import { formatError } from "../../lib/errorUtils";
 import LegalModal from "../cutzo/LegalModal";
+import { openExternalUrl } from "../../lib/utils";
 
 
 interface Props {
@@ -840,7 +841,7 @@ export default function ShopOwnerAuth({ onBack, onAuthenticated }: Props) {
                   className="mt-1 h-5 w-5 rounded border-border accent-primary outline-none"
                 />
                  <span className="text-xs font-medium text-muted-foreground leading-snug">
-                  I agree to the <button type="button" onClick={() => setActiveLegalType("terms")} className="font-bold text-foreground hover:underline">Terms of Service</button> & <button type="button" onClick={() => setActiveLegalType("privacy")} className="font-bold text-foreground hover:underline">Privacy Policy</button>
+                  I agree to the <button type="button" onClick={() => openExternalUrl("https://cutzolife.in/terms")} className="font-bold text-foreground hover:underline">Terms of Service</button> & <button type="button" onClick={() => openExternalUrl("https://cutzolife.in/privacy")} className="font-bold text-foreground hover:underline">Privacy Policy</button>
                 </span>
               </label>
 

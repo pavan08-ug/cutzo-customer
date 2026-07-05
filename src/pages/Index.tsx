@@ -34,6 +34,7 @@ import { api } from "../../convex/_generated/api";
 import { Id } from "../../convex/_generated/dataModel";
 import { usePushNotifications } from "@/hooks/usePushNotifications";
 import { useLocation, useNavigate } from "react-router-dom";
+import { openExternalUrl } from "@/lib/utils";
 
 
 // ─── Error Boundary ───────────────────────────────────────────────────────────
@@ -411,6 +412,15 @@ function AppInner() {
 
   // Central navigation function — tracks forward vs back direction for animations
   const navigateTo = (nextScreen: Screen, dir: NavDir = "forward") => {
+    if (nextScreen === "privacy") {
+      openExternalUrl("https://cutzolife.in/privacy");
+      return;
+    }
+    if (nextScreen === "terms") {
+      openExternalUrl("https://cutzolife.in/terms");
+      return;
+    }
+
     setNavDir(dir);
     
     // Update tab highlight when navigating to tab screens
