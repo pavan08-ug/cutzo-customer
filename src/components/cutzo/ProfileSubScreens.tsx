@@ -16,6 +16,8 @@ import {
 import React, { useEffect, useState } from "react";
 import { api } from "../../../convex/_generated/api";
 import { TermsAndConditions, PrivacyPolicy } from "./LegalContent";
+import { Screen } from "./types";
+
 
 
 // ─── Shared UI Helpers ─────────────────────────────────────────────────────
@@ -333,6 +335,19 @@ export function PrivacyScreen({ onBack }: { onBack: () => void }) {
   );
 }
 
+export function TermsScreen({ onBack }: { onBack: () => void }) {
+  return (
+    <div className="flex h-[100dvh] flex-col bg-muted">
+      <ScreenHeader title="Terms & Conditions" onBack={onBack} />
+      <div className="flex-1 overflow-y-auto px-4 pt-4" style={{ paddingBottom: "calc(80px + env(safe-area-inset-bottom, 0px))" }}>
+        <div className="rounded-[18px] bg-card p-5 card-shadow">
+          <TermsAndConditions />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function HelpScreen({ onBack }: { onBack: () => void }) {
   return (
     <div className="flex h-[100dvh] flex-col bg-muted">
@@ -370,35 +385,7 @@ export function HelpScreen({ onBack }: { onBack: () => void }) {
   );
 }
 
-export function AboutScreen({ onBack }: { onBack: () => void }) {
-  const [view, setView] = useState<"about" | "terms" | "privacy">("about");
-
-  if (view === "terms") {
-    return (
-      <div className="flex h-[100dvh] flex-col bg-muted animate-fade-in">
-        <ScreenHeader title="Terms & Conditions" onBack={() => setView("about")} />
-        <div className="flex-1 overflow-y-auto px-4 pt-4" style={{ paddingBottom: "calc(80px + env(safe-area-inset-bottom, 0px))" }}>
-          <div className="rounded-[18px] bg-card p-5 card-shadow">
-            <TermsAndConditions />
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  if (view === "privacy") {
-    return (
-      <div className="flex h-[100dvh] flex-col bg-muted animate-fade-in">
-        <ScreenHeader title="Privacy Policy" onBack={() => setView("about")} />
-        <div className="flex-1 overflow-y-auto px-4 pt-4" style={{ paddingBottom: "calc(80px + env(safe-area-inset-bottom, 0px))" }}>
-          <div className="rounded-[18px] bg-card p-5 card-shadow">
-            <PrivacyPolicy />
-          </div>
-        </div>
-      </div>
-    );
-  }
-
+export function AboutScreen({ onBack, onNavigate }: { onBack: () => void; onNavigate: (screen: Screen) => void }) {
   return (
     <div className="flex h-[100dvh] flex-col bg-muted">
       <ScreenHeader title="About CUTZO" onBack={onBack} />
@@ -415,8 +402,8 @@ export function AboutScreen({ onBack }: { onBack: () => void }) {
         </div>
         
         <div className="mt-10 flex flex-col gap-2">
-          <button onClick={() => setView("terms")} className="text-sm font-semibold text-primary scale-tap">Terms & Conditions</button>
-          <button onClick={() => setView("privacy")} className="text-sm font-semibold text-primary scale-tap">Privacy Policy</button>
+          <button onClick={() => onNavigate("terms")} className="text-sm font-semibold text-primary scale-tap">Terms & Conditions</button>
+          <button onClick={() => onNavigate("privacy")} className="text-sm font-semibold text-primary scale-tap">Privacy Policy</button>
         </div>
       </div>
     </div>

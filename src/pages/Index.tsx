@@ -23,6 +23,7 @@ import {
   PersonalInfoScreen,
   PrivacyScreen,
   SavedShopsScreen,
+  TermsScreen,
 } from "@/components/cutzo/ProfileSubScreens";
 import TimeSelectionScreen from "@/components/cutzo/TimeSelectionScreen";
 import ValueScreen from "@/components/cutzo/ValueScreen";
@@ -304,7 +305,8 @@ function AppInner() {
         offers: "profile",
         personalInfo: "profile",
         notifications: "profile",
-        privacy: "profile",
+        privacy: "about",
+        terms: "about",
         help: "profile",
         about: "profile",
         value: "value", // stay on value (welcome) — no exit
@@ -746,7 +748,11 @@ function AppInner() {
               )}
 
               {screen === "privacy" && (
-                <PrivacyScreen onBack={() => navigateTo("profile", "back")} />
+                <PrivacyScreen onBack={() => navigate(-1)} />
+              )}
+
+              {screen === "terms" && (
+                <TermsScreen onBack={() => navigate(-1)} />
               )}
 
               {screen === "help" && (
@@ -754,7 +760,7 @@ function AppInner() {
               )}
 
               {screen === "about" && (
-                <AboutScreen onBack={() => navigateTo("profile", "back")} />
+                <AboutScreen onBack={() => navigateTo("profile", "back")} onNavigate={(s) => navigateTo(s)} />
               )}
 
               {screen === "howItWorks" && <HowItWorksScreen onBack={() => navigateTo("profile", "back")} />}

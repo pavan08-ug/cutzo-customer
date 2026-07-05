@@ -15,6 +15,7 @@ export type Screen =
   | "personalInfo"
   | "notifications"
   | "privacy"
+  | "terms"
   | "help"
   | "about"
   | "shopLogin"
