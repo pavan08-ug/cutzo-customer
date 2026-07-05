@@ -17,6 +17,7 @@ import React, { useEffect, useState } from "react";
 import { api } from "../../../convex/_generated/api";
 import { TermsAndConditions, PrivacyPolicy } from "./LegalContent";
 import { Screen } from "./types";
+import { openExternalUrl } from "../../lib/utils";
 
 
 
@@ -402,8 +403,8 @@ export function AboutScreen({ onBack, onNavigate }: { onBack: () => void; onNavi
         </div>
         
         <div className="mt-10 flex flex-col gap-2">
-          <button onClick={() => onNavigate("terms")} className="text-sm font-semibold text-primary scale-tap">Terms & Conditions</button>
-          <button onClick={() => onNavigate("privacy")} className="text-sm font-semibold text-primary scale-tap">Privacy Policy</button>
+          <button onClick={() => openExternalUrl("https://cutzolife.in/terms")} className="text-sm font-semibold text-primary scale-tap">Terms & Conditions</button>
+          <button onClick={() => openExternalUrl("https://cutzolife.in/privacy")} className="text-sm font-semibold text-primary scale-tap">Privacy Policy</button>
         </div>
       </div>
     </div>

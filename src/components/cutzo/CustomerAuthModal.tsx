@@ -36,6 +36,7 @@ import {
 import { CustomerRecord } from "./types";
 import { formatError } from "../../lib/errorUtils";
 import LegalModal from "./LegalModal";
+import { openExternalUrl } from "../../lib/utils";
 
 
 
@@ -463,7 +464,7 @@ export default function CustomerAuthModal({ open, onClose, onAuthenticated }: Pr
                   className="mt-1 h-5 w-5 rounded border-border accent-purple-600 outline-none"
                 />
                 <span className="text-xs font-medium text-muted-foreground leading-snug">
-                  I agree to the <button type="button" onClick={() => setActiveLegalType("terms")} className="font-bold text-foreground hover:underline">Terms of Service</button> & <button type="button" onClick={() => setActiveLegalType("privacy")} className="font-bold text-foreground hover:underline">Privacy Policy</button>
+                  I agree to the <button type="button" onClick={() => openExternalUrl("https://cutzolife.in/terms")} className="font-bold text-foreground hover:underline">Terms of Service</button> & <button type="button" onClick={() => openExternalUrl("https://cutzolife.in/privacy")} className="font-bold text-foreground hover:underline">Privacy Policy</button>
                 </span>
               </label>
 
