@@ -149,7 +149,7 @@ export default function ValueScreen({ onGetStarted, onOpenVendor }: Props) {
           className="mb-8 relative"
         >
           <img 
-            src="/logo.svg" 
+            src="/logo-dark.png" 
             alt="Cutzo Logo" 
             className="w-[220px] object-contain" 
           />

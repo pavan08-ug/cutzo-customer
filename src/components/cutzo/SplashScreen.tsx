@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-// ── Cutzo Brand Icon (uses the real logo.svg asset) ────────────────
+// ── Cutzo Brand Icon (uses the real logo-dark.png asset) ────────────────
 function CutzoLogoIcon({ className }: { className?: string }) {
   return (
     <img
-      src="/logo.svg"
+      src="/logo-dark.png"
       alt="Cutzo"
       className={className}
       style={{ objectFit: "contain" }}
