@@ -32,6 +32,8 @@ import { useMutation, usePaginatedQuery, useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
 import { Id } from "../../convex/_generated/dataModel";
 import { usePushNotifications } from "@/hooks/usePushNotifications";
+import { useLocation, useNavigate } from "react-router-dom";
+
 
 // ─── Error Boundary ───────────────────────────────────────────────────────────
 class ErrorBoundary extends Component<{ children: ReactNode }, { error: Error | null }> {
@@ -128,6 +130,79 @@ const screenVariants: Variants = {
   }),
 };
 
+const screenToPath = (screen: Screen, selectedShopId?: string): string => {
+  switch (screen) {
+    case "splash":
+    case "value":
+      return "/";
+    case "home":
+      return "/";
+    case "shopDetail":
+      return `/shop/${selectedShopId}`;
+    case "serviceSelect":
+      return `/shop/${selectedShopId}/services`;
+    case "timeSelect":
+      return `/shop/${selectedShopId}/time`;
+    case "confirmation":
+      return `/shop/${selectedShopId}/confirm`;
+    case "success":
+      return "/booking/success";
+    case "activity":
+      return "/activity";
+    case "profile":
+      return "/profile";
+    case "savedShops":
+      return "/profile/saved";
+    case "offers":
+      return "/profile/offers";
+    case "personalInfo":
+      return "/profile/info";
+    case "notifications":
+      return "/profile/notifications";
+    case "privacy":
+      return "/privacy";
+    case "help":
+      return "/help";
+    case "about":
+      return "/about";
+    case "howItWorks":
+      return "/how-it-works";
+    default:
+      return "/";
+  }
+};
+
+const getScreenFromPath = (path: string, completedSplash: boolean, completedSplashState: "splash" | "value" | "home"): Screen => {
+  if (path === "/") {
+    if (!completedSplash) {
+      return completedSplashState;
+    }
+    return "home";
+  }
+  if (path.startsWith("/shop/")) {
+    const parts = path.split("/");
+    if (parts.length > 3) {
+      const sub = parts[3];
+      if (sub === "services") return "serviceSelect";
+      if (sub === "time") return "timeSelect";
+      if (sub === "confirm") return "confirmation";
+    }
+    return "shopDetail";
+  }
+  if (path === "/booking/success") return "success";
+  if (path === "/activity" || path.startsWith("/booking/")) return "activity";
+  if (path === "/profile") return "profile";
+  if (path === "/profile/saved") return "savedShops";
+  if (path === "/profile/offers") return "offers";
+  if (path === "/profile/info") return "personalInfo";
+  if (path === "/profile/notifications") return "notifications";
+  if (path === "/privacy") return "privacy";
+  if (path === "/help") return "help";
+  if (path === "/about") return "about";
+  if (path === "/how-it-works") return "howItWorks";
+  return "home";
+};
+
 export default function Index() {
   return (
     <ErrorBoundary>
@@ -137,14 +212,50 @@ export default function Index() {
 }
 
 function AppInner() {
-  const [screen, setScreen] = useState<Screen>("splash");
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  // Extract shopId from URL if present
+  const match = location.pathname.match(/\/shop\/([^\/]+)/);
+  const urlShopId = match ? match[1] : null;
+
+  const [completedSplash, setCompletedSplash] = useState(() => {
+    // Skip splash sequence if direct deep-linking
+    return window.location.pathname !== "/";
+  });
+  const [completedSplashState, setCompletedSplashState] = useState<"splash" | "value" | "home">("splash");
+
+  const screen = getScreenFromPath(location.pathname, completedSplash, completedSplashState);
+
   const [navDir, setNavDir] = useState<NavDir>("forward");
-  const [activeTab, setActiveTab] = useState<Tab>("home");
+  const [activeTab, setActiveTab] = useState<Tab>(() => {
+    const path = window.location.pathname;
+    if (path === "/activity" || path.startsWith("/booking/")) return "activity";
+    if (path.startsWith("/profile")) return "profile";
+    return "home";
+  });
   const [customer, setCustomer] = useState<CustomerRecord | null>(() => getActiveCustomer());
   const [showCustomerAuth, setShowCustomerAuth] = useState(false);
   const [authIntent, setAuthIntent] = useState<AuthIntent>(null);
   const [selectedShop, setSelectedShop] = useState<Shop | null>(null);
   const [selectedServices, setSelectedServices] = useState<Service[]>([]);
+
+  // Auto-sync: query Convex if URL contains shopId but local selectedShop is not set/correct
+  const shopQueryId = (selectedShop?.id === urlShopId) ? null : urlShopId;
+  const dbShop = useQuery(
+    api.shops.getShopById,
+    shopQueryId ? { shopId: shopQueryId as Id<"shops"> } : "skip"
+  );
+
+  useEffect(() => {
+    if (dbShop) {
+      setSelectedShop({
+        id: dbShop._id,
+        name: dbShop.shopName,
+        ...dbShop,
+      } as any as Shop);
+    }
+  }, [dbShop]);
 
   // Native Push Notifications Setup
   usePushNotifications({
@@ -168,11 +279,13 @@ function AppInner() {
 
   // Auto-advance past splash screen — long enough for the premium animation sequence
   useEffect(() => {
-    if (screen === "splash") {
-      const timeoutId = setTimeout(() => setScreen("value"), 2800);
-      return () => clearTimeout(timeoutId);
+    if (location.pathname === "/") {
+      if (completedSplashState === "splash") {
+        const timeoutId = setTimeout(() => setCompletedSplashState("value"), 2800);
+        return () => clearTimeout(timeoutId);
+      }
     }
-  }, [screen]);
+  }, [completedSplashState, location.pathname]);
 
   // Android hardware back button: navigate instead of exit
   useEffect(() => {
@@ -268,6 +381,8 @@ function AppInner() {
   // The local 'effectiveShop' uses the full data if available, otherwise falls back to the list summary
   const effectiveShop = fullShopDetails
     ? ({
+        id: fullShopDetails._id,
+        name: fullShopDetails.shopName,
         ...selectedShop,
         ...fullShopDetails,
         services: (fullShopDetails.services || []).map((s) => ({
@@ -292,11 +407,27 @@ function AppInner() {
   // Central navigation function — tracks forward vs back direction for animations
   const navigateTo = (nextScreen: Screen, dir: NavDir = "forward") => {
     setNavDir(dir);
-    setScreen(nextScreen);
+    
     // Update tab highlight when navigating to tab screens
     if (nextScreen === "home") setActiveTab("home");
     if (nextScreen === "profile") setActiveTab("profile");
     if (nextScreen === "activity") setActiveTab("activity");
+
+    if (nextScreen === "splash" || nextScreen === "value") {
+      setCompletedSplash(false);
+      setCompletedSplashState(nextScreen);
+      navigate("/");
+      return;
+    }
+
+    if (nextScreen === "home") {
+      setCompletedSplash(true);
+      setCompletedSplashState("home");
+    }
+
+    const shopId = selectedShop?.id || urlShopId;
+    const path = screenToPath(nextScreen, shopId || undefined);
+    navigate(path);
   };
 
   const handleTab = (tab: Tab) => {
@@ -364,15 +495,15 @@ function AppInner() {
 
     if (authIntent === "profile") {
       setActiveTab("profile");
-      setScreen("profile");
+      navigateTo("profile");
     }
 
     if (authIntent === "booking" && selectedShop) {
-      setScreen("serviceSelect");
+      navigateTo("serviceSelect");
     }
 
     if (authIntent === "timeSelect" && selectedShop) {
-      setScreen("timeSelect");
+      navigateTo("timeSelect");
     }
 
     if (authIntent === "home") {
@@ -396,11 +527,11 @@ function AppInner() {
     clearCustomerSession();
     setCustomer(null);
     setActiveTab("home");
-    setScreen("home");
+    navigateTo("home");
   };
 
   const handleBookNow = () => {
-    setScreen("serviceSelect");
+    navigateTo("serviceSelect");
   };
 
   const showBottomNav = ["home", "activity", "profile"].includes(screen);
