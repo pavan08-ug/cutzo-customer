@@ -35,6 +35,8 @@ import {
 } from "./authStorage";
 import { CustomerRecord } from "./types";
 import { formatError } from "../../lib/errorUtils";
+import LegalModal from "./LegalModal";
+
 
 
 interface Props {
@@ -73,7 +75,9 @@ export default function CustomerAuthModal({ open, onClose, onAuthenticated }: Pr
   const [isLocating, setIsLocating] = useState(false);
   const [isLoggingIn, setIsLoggingIn] = useState(false);
   const [firebaseUid, setFirebaseUid] = useState<string | null>(null);
+  const [activeLegalType, setActiveLegalType] = useState<"terms" | "privacy" | null>(null);
   const { showLoading, hideLoading } = useLoading();
+
 
   const upsertUser = useMutation(api.users.upsertUser);
 
@@ -459,7 +463,7 @@ export default function CustomerAuthModal({ open, onClose, onAuthenticated }: Pr
                   className="mt-1 h-5 w-5 rounded border-border accent-purple-600 outline-none"
                 />
                 <span className="text-xs font-medium text-muted-foreground leading-snug">
-                  I agree to the <a href="#" className="font-bold text-foreground hover:underline">Terms of Service</a> & <a href="#" className="font-bold text-foreground hover:underline">Privacy Policy</a>
+                  I agree to the <button type="button" onClick={() => setActiveLegalType("terms")} className="font-bold text-foreground hover:underline">Terms of Service</button> & <button type="button" onClick={() => setActiveLegalType("privacy")} className="font-bold text-foreground hover:underline">Privacy Policy</button>
                 </span>
               </label>
 
@@ -479,6 +483,12 @@ export default function CustomerAuthModal({ open, onClose, onAuthenticated }: Pr
           )}
         </div>
       </div>
+      {activeLegalType && (
+        <LegalModal
+          type={activeLegalType}
+          onClose={() => setActiveLegalType(null)}
+        />
+      )}
     </div>
   );
 }

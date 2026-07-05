@@ -15,6 +15,8 @@ import {
 } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { api } from "../../../convex/_generated/api";
+import { TermsAndConditions, PrivacyPolicy } from "./LegalContent";
+
 
 // ─── Shared UI Helpers ─────────────────────────────────────────────────────
 
@@ -321,23 +323,10 @@ export function NotificationsScreen({ userId, onBack }: { userId: string; onBack
 export function PrivacyScreen({ onBack }: { onBack: () => void }) {
   return (
     <div className="flex h-[100dvh] flex-col bg-muted">
-      <ScreenHeader title="Privacy & Security" onBack={onBack} />
+      <ScreenHeader title="Privacy Policy" onBack={onBack} />
       <div className="flex-1 overflow-y-auto px-4 pt-4" style={{ paddingBottom: "calc(80px + env(safe-area-inset-bottom, 0px))" }}>
         <div className="rounded-[18px] bg-card p-5 card-shadow">
-          <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
-            <Shield className="h-6 w-6 text-primary" />
-          </div>
-          <h2 className="mb-2 text-lg font-bold text-foreground">Data Privacy</h2>
-          <p className="text-sm text-muted-foreground leading-relaxed mb-6">
-            CUTZO protects your personal information using industry-standard encryption. 
-            We do not share your phone number or booking history with third parties without your explicit consent.
-          </p>
-          
-          <h2 className="mb-2 text-lg font-bold text-foreground">Account Security</h2>
-          <p className="text-sm text-muted-foreground leading-relaxed">
-            Your account is secured via OTP authentication and Clerk secure tokens. 
-            If you notice any suspicious activity, please contact support immediately.
-          </p>
+          <PrivacyPolicy />
         </div>
       </div>
     </div>
@@ -389,23 +378,8 @@ export function AboutScreen({ onBack }: { onBack: () => void }) {
       <div className="flex h-[100dvh] flex-col bg-muted animate-fade-in">
         <ScreenHeader title="Terms & Conditions" onBack={() => setView("about")} />
         <div className="flex-1 overflow-y-auto px-4 pt-4" style={{ paddingBottom: "calc(80px + env(safe-area-inset-bottom, 0px))" }}>
-          <div className="rounded-[18px] bg-card p-5 card-shadow space-y-4">
-            <h2 className="text-lg font-bold text-foreground">1. User Agreement</h2>
-            <p className="text-sm text-muted-foreground leading-relaxed">
-              By accessing CUTZO, you agree to be bound by these terms in accordance with the Indian Contract Act, 1872. CUTZO acts purely as a booking aggregator platform.
-            </p>
-            <h2 className="text-lg font-bold text-foreground">2. Services & Pricing</h2>
-            <p className="text-sm text-muted-foreground leading-relaxed">
-              All prices are determined by the respective barber shops and are inclusive of applicable taxes, including GST, as per Indian law.
-            </p>
-            <h2 className="text-lg font-bold text-foreground">3. User Conduct</h2>
-            <p className="text-sm text-muted-foreground leading-relaxed">
-              You agree to comply with the Information Technology Act, 2000. Any misuse of the platform, including fraudulent bookings, may result in account termination.
-            </p>
-            <h2 className="text-lg font-bold text-foreground">4. Governing Law</h2>
-            <p className="text-sm text-muted-foreground leading-relaxed">
-              These terms are governed by the laws of India. Any disputes arising shall be subject to the exclusive jurisdiction of the competent courts in India.
-            </p>
+          <div className="rounded-[18px] bg-card p-5 card-shadow">
+            <TermsAndConditions />
           </div>
         </div>
       </div>
@@ -417,23 +391,8 @@ export function AboutScreen({ onBack }: { onBack: () => void }) {
       <div className="flex h-[100dvh] flex-col bg-muted animate-fade-in">
         <ScreenHeader title="Privacy Policy" onBack={() => setView("about")} />
         <div className="flex-1 overflow-y-auto px-4 pt-4" style={{ paddingBottom: "calc(80px + env(safe-area-inset-bottom, 0px))" }}>
-          <div className="rounded-[18px] bg-card p-5 card-shadow space-y-4">
-            <h2 className="text-lg font-bold text-foreground">1. Data Collection</h2>
-            <p className="text-sm text-muted-foreground leading-relaxed">
-              We collect personal information such as name, phone number, and location in compliance with the Digital Personal Data Protection (DPDP) Act, 2023.
-            </p>
-            <h2 className="text-lg font-bold text-foreground">2. Use of Information</h2>
-            <p className="text-sm text-muted-foreground leading-relaxed">
-              Your data is used solely to facilitate salon bookings, improve our services, and communicate with you regarding your appointments.
-            </p>
-            <h2 className="text-lg font-bold text-foreground">3. Data Security</h2>
-            <p className="text-sm text-muted-foreground leading-relaxed">
-              We implement reasonable security practices and procedures as mandated by the Information Technology (Reasonable Security Practices and Procedures and Sensitive Personal Data or Information) Rules, 2011 to protect your data.
-            </p>
-            <h2 className="text-lg font-bold text-foreground">4. User Rights</h2>
-            <p className="text-sm text-muted-foreground leading-relaxed">
-              You have the right to access, correct, or delete your personal data. For grievances, you may contact our Grievance Officer via the Help Center.
-            </p>
+          <div className="rounded-[18px] bg-card p-5 card-shadow">
+            <PrivacyPolicy />
           </div>
         </div>
       </div>

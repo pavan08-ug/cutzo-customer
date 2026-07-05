@@ -30,6 +30,8 @@ import {
   ShopOwnerRecord,
 } from "./storage";
 import { formatError } from "../../lib/errorUtils";
+import LegalModal from "../cutzo/LegalModal";
+
 
 interface Props {
   onBack: () => void;
@@ -118,6 +120,8 @@ export default function ShopOwnerAuth({ onBack, onAuthenticated }: Props) {
   const [firebaseUid, setFirebaseUid] = useState<string | null>(null);
   const [loginUsername, setLoginUsername] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
+  const [activeLegalType, setActiveLegalType] = useState<"terms" | "privacy" | null>(null);
+
   
   const upsertShop = useAction(api.auth_actions.upsertShop);
   const loginMutation = useAction(api.auth_actions.loginShopOwner);
@@ -835,8 +839,8 @@ export default function ShopOwnerAuth({ onBack, onAuthenticated }: Props) {
                   }
                   className="mt-1 h-5 w-5 rounded border-border accent-primary outline-none"
                 />
-                <span className="text-xs font-medium text-muted-foreground leading-snug">
-                  I agree to the <a href="#" className="font-bold text-foreground hover:underline">Terms of Service</a> & <a href="#" className="font-bold text-foreground hover:underline">Privacy Policy</a>
+                 <span className="text-xs font-medium text-muted-foreground leading-snug">
+                  I agree to the <button type="button" onClick={() => setActiveLegalType("terms")} className="font-bold text-foreground hover:underline">Terms of Service</button> & <button type="button" onClick={() => setActiveLegalType("privacy")} className="font-bold text-foreground hover:underline">Privacy Policy</button>
                 </span>
               </label>
 
@@ -880,6 +884,12 @@ export default function ShopOwnerAuth({ onBack, onAuthenticated }: Props) {
           </div>
         </div>
       </div>
+      {activeLegalType && (
+        <LegalModal
+          type={activeLegalType}
+          onClose={() => setActiveLegalType(null)}
+        />
+      )}
     </div>
   );
 }
