@@ -1,55 +1,15 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-// ── Animated SVG Z Logo (custom, premium) ─────────────────────────
+// ── Cutzo Brand Icon (uses the real icon.svg asset) ────────────────
 function CutzoLogoIcon({ className }: { className?: string }) {
   return (
-    <svg
+    <img
+      src="/icon.svg"
+      alt="Cutzo"
       className={className}
-      viewBox="0 0 1024 1024"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <defs>
-        <mask id="cutMaskSplash">
-          <rect width="1024" height="1024" fill="white" />
-          <path d="M 80 940 Q 512 650 860 160 L 800 140 Q 512 600 60 900 Z" fill="black" />
-        </mask>
-      </defs>
-      
-      <g mask="url(#cutMaskSplash)">
-        {/* Top Horizontal Bar */}
-        <motion.path
-          d="M 280 340 L 744 340"
-          stroke="white"
-          strokeWidth="150"
-          strokeLinecap="round"
-          initial={{ pathLength: 0, opacity: 0 }}
-          animate={{ pathLength: 1, opacity: 1 }}
-          transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
-        />
-        {/* Diagonal Stroke */}
-        <motion.path
-          d="M 744 340 L 280 684"
-          stroke="white"
-          strokeWidth="150"
-          strokeLinejoin="miter"
-          initial={{ pathLength: 0, opacity: 0 }}
-          animate={{ pathLength: 1, opacity: 1 }}
-          transition={{ duration: 0.6, ease: "easeOut", delay: 0.4 }}
-        />
-        {/* Bottom Horizontal Bar */}
-        <motion.path
-          d="M 280 684 L 744 684"
-          stroke="white"
-          strokeWidth="150"
-          strokeLinecap="round"
-          initial={{ pathLength: 0, opacity: 0 }}
-          animate={{ pathLength: 1, opacity: 1 }}
-          transition={{ duration: 0.6, ease: "easeOut", delay: 0.6 }}
-        />
-      </g>
-    </svg>
+      style={{ objectFit: "contain" }}
+    />
   );
 }
 
@@ -155,7 +115,7 @@ export default function SplashScreen() {
         >
           {/* Outer glow ring */}
           <motion.div
-            className="absolute -inset-5 rounded-[40px]"
+            className="absolute -inset-6 rounded-[44px]"
             style={{
               background: "radial-gradient(circle, rgba(180,80,255,0.3) 0%, transparent 70%)",
             }}
@@ -165,26 +125,15 @@ export default function SplashScreen() {
 
           {/* Orbit particles */}
           <div className="absolute inset-0 flex items-center justify-center">
-            <OrbitParticle delay={0.9} radius={58} size={5} duration={3.5} />
-            <OrbitParticle delay={1.2} radius={70} size={4} duration={4.5} />
-            <OrbitParticle delay={1.5} radius={46} size={3} duration={2.8} />
+            <OrbitParticle delay={0.9} radius={70} size={5} duration={3.5} />
+            <OrbitParticle delay={1.2} radius={85} size={4} duration={4.5} />
+            <OrbitParticle delay={1.5} radius={58} size={3} duration={2.8} />
           </div>
 
-          {/* Glass card */}
-          <div
-            className="relative flex h-[88px] w-[88px] items-center justify-center rounded-[26px] shadow-2xl"
-            style={{
-              background:
-                "linear-gradient(145deg, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0.06) 100%)",
-              border: "1px solid rgba(255,255,255,0.28)",
-              backdropFilter: "blur(12px)",
-              boxShadow:
-                "0 20px 60px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.25)",
-            }}
-          >
-            {/* Cutzo Logo animation */}
-            <CutzoLogoIcon className="h-12 w-12" />
-          </div>
+          {/* Brand icon — full Cutzo logo */}
+          <CutzoLogoIcon
+            className="h-[120px] w-[120px] rounded-[30px]"
+          />
         </motion.div>
 
         {/* Brand name — letter reveal */}
