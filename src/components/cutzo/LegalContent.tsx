@@ -51,7 +51,7 @@ export function TermsAndConditions() {
           3.3 <strong>Account Security:</strong> You are solely responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account. You agree to:
         </p>
         <ul className="list-disc pl-5 space-y-1">
-          <li>Notify us immediately at <a href="mailto:cutzo.saloon@gmail.com" className="text-primary hover:underline font-semibold">cutzo.saloon@gmail.com</a> of any unauthorized use of your account.</li>
+          <li>Notify us immediately at <a href="mailto:cutzosaloon@gmail.com" className="text-primary hover:underline font-semibold">cutzosaloon@gmail.com</a> of any unauthorized use of your account.</li>
           <li>Ensure you log out from your account at the end of each session on shared devices.</li>
         </ul>
         <p>
@@ -287,7 +287,7 @@ export function TermsAndConditions() {
           14.2 <strong>Jurisdiction:</strong> Any disputes arising out of or in connection with these Terms shall be subject to the exclusive jurisdiction of the courts located in <strong>India</strong>.
         </p>
         <p>
-          14.3 <strong>Informal Resolution:</strong> Before initiating any formal legal proceeding, you agree to contact us at <a href="mailto:cutzo.saloon@gmail.com" className="text-primary hover:underline font-semibold">cutzo.saloon@gmail.com</a> and attempt to resolve the dispute informally for a period of thirty (30) days.
+          14.3 <strong>Informal Resolution:</strong> Before initiating any formal legal proceeding, you agree to contact us at <a href="mailto:cutzosaloon@gmail.com" className="text-primary hover:underline font-semibold">cutzosaloon@gmail.com</a> and attempt to resolve the dispute informally for a period of thirty (30) days.
         </p>
         <p>
           14.4 <strong>Consumer Disputes:</strong> Nothing in these Terms shall affect your statutory rights as a consumer under the Consumer Protection Act, 2019 (India).
@@ -297,7 +297,7 @@ export function TermsAndConditions() {
       <section className="space-y-2">
         <h2 className="text-base font-extrabold text-foreground">15. TERMINATION</h2>
         <p>
-          15.1 You may terminate your account at any time by deleting the App and contacting us at <a href="mailto:cutzo.saloon@gmail.com" className="text-primary hover:underline font-semibold">cutzo.saloon@gmail.com</a> to request account deletion.
+          15.1 You may terminate your account at any time by deleting the App and contacting us at <a href="mailto:cutzosaloon@gmail.com" className="text-primary hover:underline font-semibold">cutzosaloon@gmail.com</a> to request account deletion.
         </p>
         <p>
           15.2 Cutzo may suspend or permanently terminate your access to the Services at any time, with or without notice, if:
@@ -362,7 +362,7 @@ export function TermsAndConditions() {
               </tr>
               <tr>
                 <td className="px-3 py-2 font-bold text-foreground bg-muted/50">Email</td>
-                <td className="px-3 py-2"><a href="mailto:cutzo.saloon@gmail.com" className="text-primary hover:underline">cutzo.saloon@gmail.com</a></td>
+                <td className="px-3 py-2"><a href="mailto:cutzosaloon@gmail.com" className="text-primary hover:underline">cutzosaloon@gmail.com</a></td>
               </tr>
               <tr>
                 <td className="px-3 py-2 font-bold text-foreground bg-muted/50">Grievance Officer</td>
@@ -370,7 +370,7 @@ export function TermsAndConditions() {
               </tr>
               <tr>
                 <td className="px-3 py-2 font-bold text-foreground bg-muted/50">Grievance Email</td>
-                <td className="px-3 py-2"><a href="mailto:cutzo.saloon@gmail.com" className="text-primary hover:underline">cutzo.saloon@gmail.com</a></td>
+                <td className="px-3 py-2"><a href="mailto:cutzosaloon@gmail.com" className="text-primary hover:underline">cutzosaloon@gmail.com</a></td>
               </tr>
               <tr>
                 <td className="px-3 py-2 font-bold text-foreground bg-muted/50">Registered Address</td>
@@ -435,7 +435,7 @@ export function PrivacyPolicy() {
               </tr>
               <tr>
                 <td className="px-3 py-2 font-bold text-foreground bg-muted/50">Contact Email</td>
-                <td className="px-3 py-2"><a href="mailto:cutzo.saloon@gmail.com" className="text-primary hover:underline">cutzo.saloon@gmail.com</a></td>
+                <td className="px-3 py-2"><a href="mailto:cutzosaloon@gmail.com" className="text-primary hover:underline">cutzosaloon@gmail.com</a></td>
               </tr>
               <tr>
                 <td className="px-3 py-2 font-bold text-foreground bg-muted/50">Registered Address</td>
@@ -677,7 +677,7 @@ export function PrivacyPolicy() {
           7.2 These messages are transactional and service-related (not advertising).
         </p>
         <p>
-          7.3 You may opt out of WhatsApp reminders by contacting us at <a href="mailto:cutzo.saloon@gmail.com" className="text-primary hover:underline font-semibold">cutzo.saloon@gmail.com</a> or by removing your phone number from your profile.
+          7.3 You may opt out of WhatsApp reminders by contacting us at <a href="mailto:cutzosaloon@gmail.com" className="text-primary hover:underline font-semibold">cutzosaloon@gmail.com</a> or by removing your phone number from your profile.
         </p>
       </section>
 
@@ -836,7 +836,7 @@ export function PrivacyPolicy() {
               <tr>
                 <td className="px-3 py-2 font-semibold">Right to Access</td>
                 <td className="px-3 py-2">Request a copy of personal data we hold about you</td>
-                <td className="px-3 py-2">Email <a href="mailto:cutzo.saloon@gmail.com" className="text-primary hover:underline">cutzo.saloon@gmail.com</a></td>
+                <td className="px-3 py-2">Email <a href="mailto:cutzosaloon@gmail.com" className="text-primary hover:underline">cutzosaloon@gmail.com</a></td>
               </tr>
               <tr>
                 <td className="px-3 py-2 font-semibold">Right to Correction</td>
@@ -846,7 +846,7 @@ export function PrivacyPolicy() {
               <tr>
                 <td className="px-3 py-2 font-semibold">Right to Erasure</td>
                 <td className="px-3 py-2">Request deletion of your personal data (&quot;Right to be Forgotten&quot;)</td>
-                <td className="px-3 py-2">Email <a href="mailto:cutzo.saloon@gmail.com" className="text-primary hover:underline">cutzo.saloon@gmail.com</a></td>
+                <td className="px-3 py-2">Email <a href="mailto:cutzosaloon@gmail.com" className="text-primary hover:underline">cutzosaloon@gmail.com</a></td>
               </tr>
               <tr>
                 <td className="px-3 py-2 font-semibold">Right to Withdraw Consent</td>
@@ -877,7 +877,7 @@ export function PrivacyPolicy() {
           12.1 The App is <strong>not directed to children under the age of 13</strong>. We do not knowingly collect personal data from children under 13.
         </p>
         <p>
-          12.2 If you are a parent or guardian and believe your child has provided us with personal information, please contact us at <a href="mailto:cutzo.saloon@gmail.com" className="text-primary hover:underline font-semibold">cutzo.saloon@gmail.com</a> and we will delete such information promptly.
+          12.2 If you are a parent or guardian and believe your child has provided us with personal information, please contact us at <a href="mailto:cutzosaloon@gmail.com" className="text-primary hover:underline font-semibold">cutzosaloon@gmail.com</a> and we will delete such information promptly.
         </p>
       </section>
 
@@ -916,7 +916,7 @@ export function PrivacyPolicy() {
               </tr>
               <tr>
                 <td className="px-3 py-2 font-bold text-foreground bg-muted/50">Email</td>
-                <td className="px-3 py-2"><a href="mailto:cutzo.saloon@gmail.com" className="text-primary hover:underline">cutzo.saloon@gmail.com</a></td>
+                <td className="px-3 py-2"><a href="mailto:cutzosaloon@gmail.com" className="text-primary hover:underline">cutzosaloon@gmail.com</a></td>
               </tr>
               <tr>
                 <td className="px-3 py-2 font-bold text-foreground bg-muted/50">Address</td>
@@ -982,11 +982,11 @@ export function PrivacyPolicy() {
               </tr>
               <tr>
                 <td className="px-3 py-2 font-bold text-foreground bg-muted/50">Privacy Email</td>
-                <td className="px-3 py-2"><a href="mailto:cutzo.saloon@gmail.com" className="text-primary hover:underline">cutzo.saloon@gmail.com</a></td>
+                <td className="px-3 py-2"><a href="mailto:cutzosaloon@gmail.com" className="text-primary hover:underline">cutzosaloon@gmail.com</a></td>
               </tr>
               <tr>
                 <td className="px-3 py-2 font-bold text-foreground bg-muted/50">Support Email</td>
-                <td className="px-3 py-2"><a href="mailto:cutzo.saloon@gmail.com" className="text-primary hover:underline">cutzo.saloon@gmail.com</a></td>
+                <td className="px-3 py-2"><a href="mailto:cutzosaloon@gmail.com" className="text-primary hover:underline">cutzosaloon@gmail.com</a></td>
               </tr>
               <tr>
                 <td className="px-3 py-2 font-bold text-foreground bg-muted/50">Registered Address</td>
