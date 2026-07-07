@@ -112,6 +112,8 @@ export default defineSchema({
     date: v.string(),
     time: v.string(),
     status: v.string(), // "pending" | "confirmed" | "checked_in" | "active" | "completed" | "cancelled" | "no_show" | "rescheduled"
+    arrivalTime: v.optional(v.number()), // timestamp when customer checked in or arrived
+    notes: v.optional(v.string()),
     otp: v.optional(v.number()),
     otpVerified: v.optional(v.boolean()),
     otpCreatedAt: v.optional(v.number()),
@@ -175,6 +177,8 @@ export default defineSchema({
     estimatedDuration: v.number(), // minutes
     calculatedFinishTime: v.number(), // timestamp
     status: v.string(), // "active" | "completed" | "cancelled" | "checked_in"
+    arrivalTime: v.optional(v.number()),
+    notes: v.optional(v.string()),
   }).index("by_shop", ["shopId"])
     .index("by_status", ["status"]),
 
