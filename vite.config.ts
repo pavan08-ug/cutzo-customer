@@ -15,6 +15,7 @@ export default defineConfig(({ mode }) => ({
   },
   define: {
     "__BUILD_DATE__": JSON.stringify(Date.now().toString()),
+    "__APP_VERSION__": JSON.stringify(JSON.parse(fs.readFileSync(path.resolve(__dirname, "package.json"), "utf-8")).version || "1.0.0"),
   },
   plugins: [
     react(),

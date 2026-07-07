@@ -176,14 +176,13 @@ export default function ValueScreen({ onGetStarted, onOpenVendor }: Props) {
           className="mt-4 text-[14px] font-medium leading-relaxed"
           style={{ color: "rgba(210,190,255,0.8)", maxWidth: "260px" }}
         >
-          Premium grooming, fixed pricing,<br />zero waiting time.
+          Premium grooming,<br />zero waiting time.
         </motion.p>
 
         {/* Feature pills */}
         <div className="mt-7 flex flex-wrap justify-center gap-2.5">
           <FeaturePill icon={Star}    label="Trusted Reviews"  delay={0.65} />
           <FeaturePill icon={Clock}   label="Instant Booking"  delay={0.78} />
-          <FeaturePill icon={Zap}     label="Fixed Pricing"    delay={0.91} />
         </div>
       </div>
 

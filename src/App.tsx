@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Capacitor } from "@capacitor/core";
 import Index from "./pages/Index.tsx";
+import AdminDashboard from "./pages/AdminDashboard.tsx";
 
 const queryClient = new QueryClient();
 
@@ -18,6 +19,7 @@ const App = () => (
       <Sonner />
       <AppRouter>
         <Routes>
+          <Route path="/admin/*" element={<AdminDashboard />} />
           <Route path="/*" element={<Index />} />
         </Routes>
       </AppRouter>

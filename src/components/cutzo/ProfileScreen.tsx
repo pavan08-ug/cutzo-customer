@@ -48,7 +48,7 @@ export default function ProfileScreen({ user, onNavigate, onLogout }: Props) {
       title: "Support",
       items: [
         { icon: HelpCircle, label: "Help Center", sub: "", screen: "help" as Screen },
-        { icon: Info, label: "About CUTZO", sub: "v1.0.0", screen: "about" as Screen },
+        { icon: Info, label: "About CUTZO", sub: "v" + (typeof __APP_VERSION__ !== 'undefined' ? __APP_VERSION__ : '1.0.0'), screen: "about" as Screen },
         { icon: MapPin, label: "How it Works", sub: "", screen: "howItWorks" as Screen },
       ],
     },
@@ -140,7 +140,7 @@ export default function ProfileScreen({ user, onNavigate, onLogout }: Props) {
         </button>
 
         <p className="pb-2 pt-4 text-center text-xs font-medium text-muted-foreground">
-          CUTZO v1.0.0 / Made in India
+          CUTZO v{typeof __APP_VERSION__ !== 'undefined' ? __APP_VERSION__ : '1.0.0'} / Made in India
         </p>
       </div>
     </div>

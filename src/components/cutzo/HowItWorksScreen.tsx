@@ -9,7 +9,7 @@ const steps = [
   {
     icon: MapPin,
     title: "Find a Shop",
-    desc: "Browse nearby barber shops with fixed pricing and trusted reviews before you choose.",
+    desc: "Browse nearby barber shops with trusted reviews before you choose.",
     color: "from-blue-500 to-cyan-400",
     shadow: "shadow-blue-500/20"
   },

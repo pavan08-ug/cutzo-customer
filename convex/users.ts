@@ -16,10 +16,16 @@ export const upsertUser = mutation({
     if (!identity) throw new Error("Unauthenticated");
     if (identity.subject !== args.uid) throw new Error("Unauthorized");
 
-    const existing = await ctx.db
+    const allExisting = await ctx.db
       .query("users")
       .withIndex("by_uid", (q) => q.eq("uid", args.uid))
-      .first();
+      .collect();
+    const existing = allExisting[0];
+
+    // Remove any duplicate previous records from Convex
+    for (let i = 1; i < allExisting.length; i++) {
+      await ctx.db.delete(allExisting[i]._id);
+    }
 
     const data = {
       uid: args.uid,
@@ -80,3 +86,74 @@ export const deleteUserAccount = mutation({
     return { success: true };
   },
 });
+
+export const updateUserProfile = mutation({
+  args: {
+    uid: v.string(),
+    name: v.string(),
+    phone: v.optional(v.string()),
+    location: v.optional(v.string()),
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) throw new Error("Unauthenticated");
+    if (identity.subject !== args.uid) throw new Error("Unauthorized");
+
+    // 1. Find all user records matching this uid
+    const userRecords = await ctx.db
+      .query("users")
+      .withIndex("by_uid", (q) => q.eq("uid", args.uid))
+      .collect();
+
+    if (userRecords.length === 0) {
+      throw new Error("User not found");
+    }
+
+    // Update primary record with new data
+    await ctx.db.patch(userRecords[0]._id, {
+      name: args.name,
+      phone: args.phone,
+      location: args.location,
+    });
+
+    // Remove any previous/duplicate user records from Convex
+    for (let i = 1; i < userRecords.length; i++) {
+      await ctx.db.delete(userRecords[i]._id);
+    }
+
+    // 2. Update bookings so previous customerName/customerPhone data is replaced/removed in Convex
+    const bookings = await ctx.db
+      .query("bookings")
+      .withIndex("by_customer", (q) => q.eq("customerId", args.uid))
+      .collect();
+    for (const b of bookings) {
+      await ctx.db.patch(b._id, {
+        customerName: args.name,
+        customerPhone: args.phone,
+      });
+    }
+
+    // 3. Update reviews so previous customerName is replaced/removed in Convex
+    const reviews = await ctx.db
+      .query("reviews")
+      .withIndex("by_customer", (q) => q.eq("customerId", args.uid))
+      .collect();
+    for (const r of reviews) {
+      await ctx.db.patch(r._id, {
+        customerName: args.name,
+      });
+    }
+
+    // 4. Remove previous location requests for this user from Convex
+    const locationReqs = await ctx.db
+      .query("locationRequests")
+      .withIndex("by_user", (q) => q.eq("userId", args.uid))
+      .collect();
+    for (const lr of locationReqs) {
+      await ctx.db.delete(lr._id);
+    }
+
+    return { success: true };
+  },
+});
+

@@ -10,9 +10,11 @@ export default defineSchema({
     location: v.optional(v.string()),
     gpsLocation: v.optional(v.string()),
     phone: v.optional(v.string()),
-    role: v.optional(v.union(v.literal("customer"), v.literal("shop_owner"))),
+    role: v.optional(v.union(v.literal("customer"), v.literal("shop_owner"), v.literal("admin"))),
     fcmToken: v.optional(v.string()), // added for push notifications
     createdAt: v.optional(v.string()),
+    noShowStrikes: v.optional(v.number()), // admin: no-show strike count
+    bookingBanUntil: v.optional(v.number()), // admin: ban expiry timestamp (ms)
   }).index("by_uid", ["uid"])
     .index("by_firebase_uid", ["firebaseUid"])
     .index("by_phone", ["phone"]),
@@ -121,7 +123,10 @@ export default defineSchema({
     otpCreatedAt: v.optional(v.number()),
     // LOG-05 FIX: Changed from v.string() to v.number() so timestamps are
     // properly comparable for cleanup crons and time-based queries.
-    completedAt: v.optional(v.number())
+    completedAt: v.optional(v.number()),
+    delayMinutes: v.optional(v.number()), // admin: recorded delay in minutes
+    bookingStartMs: v.optional(v.number()), // admin: precise start timestamp
+    cancelReason: v.optional(v.string()), // admin: reason for force-cancel
   }).index("by_shop_date_time", ["shopId", "date", "time"])
     // LOG-07 FIX: Changed from ["customerId", "date", "time"] to just ["customerId"].
     // The query only filters by customerId, and ordering by a 12-hour "time" string
@@ -187,4 +192,21 @@ export default defineSchema({
     currentCustomerType: v.optional(v.union(v.literal("walk-in"), v.literal("online"))),
     activeItemId: v.optional(v.string()), // ID of the walkIn or booking
   }).index("by_shop", ["shopId"]),
+
+  // Admin: app-wide configuration key-value store
+  appConfig: defineTable({
+    key: v.string(),
+    value: v.any(),
+    updatedAt: v.number(),
+  }).index("by_key", ["key"]),
+
+  // Admin: audit log of every admin action
+  adminLogs: defineTable({
+    adminUid: v.string(),
+    action: v.string(),
+    targetId: v.optional(v.string()),
+    targetType: v.optional(v.string()),
+    description: v.string(),
+    createdAt: v.number(),
+  }).index("by_created", ["createdAt"]),
 });

@@ -1,7 +1,7 @@
 {
   "name": "Cutzo – Book Salon Appointments",
   "short_name": "Cutzo",
-  "description": "Find nearby salons and barber shops, compare fixed pricing, and book a slot in seconds.",
+  "description": "Find nearby salons and barber shops, view trusted reviews, and book a slot in seconds.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",

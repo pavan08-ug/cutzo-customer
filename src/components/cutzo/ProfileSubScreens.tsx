@@ -4,20 +4,24 @@ import {
   ArrowLeft,
   Bell,
   Bookmark,
+  Check,
   ChevronRight,
+  Loader2,
   MapPin,
   MessageCircle,
+  Pencil,
   Phone,
   Scissors,
   Shield,
   Tag,
   X,
 } from "lucide-react";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { api } from "../../../convex/_generated/api";
 import { TermsAndConditions, PrivacyPolicy } from "./LegalContent";
 import { Screen } from "./types";
 import { openExternalUrl } from "../../lib/utils";
+import { saveCustomer } from "./authStorage";
 
 
 
@@ -173,9 +177,89 @@ export function OffersScreen({ city, onBack }: { city: string; onBack: () => voi
 
 export function PersonalInfoScreen({ userId, onBack }: { userId: string; onBack: () => void }) {
   const customerList = useQuery(api.users.getUserByUid, { uid: userId });
-  // Note: we can map customer uid to customer table format. The earlier app version used CustomerRecord in local storage.
-  // We'll trust local storage user object if convex fails, but display what Convex returns.
-  
+  const updateUserProfile = useMutation(api.users.updateUserProfile);
+  const upsertUser = useMutation(api.users.upsertUser);
+
+  const [isEditing, setIsEditing] = useState(false);
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [location, setLocation] = useState("");
+  const [isSaving, setIsSaving] = useState(false);
+  const [saveSuccess, setSaveSuccess] = useState(false);
+
+  const nameRef = useRef<HTMLInputElement>(null);
+  const phoneRef = useRef<HTMLInputElement>(null);
+  const locationRef = useRef<HTMLInputElement>(null);
+
+  const c = customerList;
+
+  useEffect(() => {
+    if (c) {
+      setName(c.name || "");
+      setPhone(c.phone || "");
+      setLocation(c.location || "");
+    }
+  }, [c]);
+
+  const handleEditClick = (field: "name" | "phone" | "location") => {
+    setIsEditing(true);
+    setTimeout(() => {
+      if (field === "name") nameRef.current?.focus();
+      if (field === "phone") phoneRef.current?.focus();
+      if (field === "location") locationRef.current?.focus();
+    }, 50);
+  };
+
+  const handleSave = async () => {
+    if (!name.trim()) return;
+    setIsSaving(true);
+    setSaveSuccess(false);
+    try {
+      // 1. Call updateUserProfile in Convex to update profile & remove previous data
+      if (api.users.updateUserProfile) {
+        await updateUserProfile({
+          uid: userId,
+          name: name.trim(),
+          phone: phone.trim(),
+          location: location.trim(),
+        });
+      } else {
+        await upsertUser({
+          uid: userId,
+          name: name.trim(),
+          email: c?.email || "",
+          phone: phone.trim(),
+          location: location.trim(),
+          gpsLocation: c?.gpsLocation || "",
+          role: c?.role || "customer",
+        });
+      }
+
+      // 2. Also update local storage session/customer DB
+      try {
+        saveCustomer({
+          userId: userId,
+          role: c?.role || "customer",
+          name: name.trim(),
+          phone: phone.trim(),
+          location: location.trim() || "Location pending",
+          email: c?.email || "",
+        });
+      } catch (e) {
+        console.warn("Local save error", e);
+      }
+
+      setIsEditing(false);
+      setSaveSuccess(true);
+      setTimeout(() => setSaveSuccess(false), 4000);
+    } catch (err) {
+      console.error("Failed to update profile:", err);
+      alert("Failed to update profile. Please try again.");
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
   if (customerList === undefined) {
     return (
       <div className="flex h-[100dvh] flex-col bg-muted">
@@ -185,22 +269,94 @@ export function PersonalInfoScreen({ userId, onBack }: { userId: string; onBack:
     );
   }
 
-  const c = customerList;
-
   return (
     <div className="flex h-[100dvh] flex-col bg-muted">
-      <ScreenHeader title="Personal Info" subtitle="Your account details" onBack={onBack} />
-      <div className="flex-1 overflow-y-auto px-4 pt-4" style={{ paddingBottom: "calc(80px + env(safe-area-inset-bottom, 0px))" }}>
-        
+      <ScreenHeader 
+        title="Personal Info" 
+        subtitle="Your account details" 
+        onBack={onBack}
+        action={
+          !isEditing ? (
+            <button
+              onClick={() => setIsEditing(true)}
+              className="flex items-center gap-1.5 rounded-full bg-white/20 px-3 py-1.5 text-xs font-bold text-white scale-tap hover:bg-white/30 transition-colors"
+            >
+              <Pencil className="h-3.5 w-3.5" />
+              <span>Edit</span>
+            </button>
+          ) : undefined
+        }
+      />
+      <div className="flex-1 overflow-y-auto px-4 pt-4" style={{ paddingBottom: "calc(100px + env(safe-area-inset-bottom, 0px))" }}>
+        {saveSuccess && (
+          <div className="mb-4 flex items-center gap-2.5 rounded-2xl bg-green-500/15 border border-green-500/30 p-3.5 text-xs font-bold text-green-700 dark:text-green-400 animate-fade-slide-up shadow-sm">
+            <Check className="h-4 w-4 text-green-600 dark:text-green-400 shrink-0" />
+            <span>Profile updated & previous data removed from Convex!</span>
+          </div>
+        )}
+
         <div className="overflow-hidden rounded-[18px] bg-card card-shadow mb-6">
+          {/* Full Name */}
           <div className="border-b border-border p-4">
-            <p className="text-xs font-bold uppercase tracking-wide text-muted-foreground">Full Name</p>
-            <p className="mt-1 text-base font-semibold text-foreground">{c?.name || "Not provided"}</p>
+            <div className="flex items-center justify-between">
+              <div className="flex-1 pr-3">
+                <p className="text-xs font-bold uppercase tracking-wide text-muted-foreground">Full Name</p>
+                {isEditing ? (
+                  <input
+                    ref={nameRef}
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Enter full name"
+                    className="mt-1.5 w-full rounded-xl border border-primary/40 bg-primary/5 px-3.5 py-2 text-base font-semibold text-foreground focus:border-primary focus:bg-card focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all shadow-inner"
+                  />
+                ) : (
+                  <p className="mt-1 text-base font-semibold text-foreground">{name || c?.name || "Not provided"}</p>
+                )}
+              </div>
+              {!isEditing && (
+                <button
+                  onClick={() => handleEditClick("name")}
+                  className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary hover:bg-primary/20 active:scale-95 transition-all scale-tap"
+                  title="Edit Name"
+                >
+                  <Pencil className="h-4 w-4" />
+                </button>
+              )}
+            </div>
           </div>
+
+          {/* Phone Number */}
           <div className="border-b border-border p-4">
-            <p className="text-xs font-bold uppercase tracking-wide text-muted-foreground">Phone Number</p>
-            <p className="mt-1 text-base font-semibold text-foreground">{c?.phone || "Not provided"}</p>
+            <div className="flex items-center justify-between">
+              <div className="flex-1 pr-3">
+                <p className="text-xs font-bold uppercase tracking-wide text-muted-foreground">Phone Number</p>
+                {isEditing ? (
+                  <input
+                    ref={phoneRef}
+                    type="tel"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    placeholder="Enter phone number"
+                    className="mt-1.5 w-full rounded-xl border border-primary/40 bg-primary/5 px-3.5 py-2 text-base font-semibold text-foreground focus:border-primary focus:bg-card focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all shadow-inner"
+                  />
+                ) : (
+                  <p className="mt-1 text-base font-semibold text-foreground">{phone || c?.phone || "Not provided"}</p>
+                )}
+              </div>
+              {!isEditing && (
+                <button
+                  onClick={() => handleEditClick("phone")}
+                  className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary hover:bg-primary/20 active:scale-95 transition-all scale-tap"
+                  title="Edit Phone Number"
+                >
+                  <Pencil className="h-4 w-4" />
+                </button>
+              )}
+            </div>
           </div>
+
+          {/* Email (Read only) */}
           <div className="p-4">
             <p className="text-xs font-bold uppercase tracking-wide text-muted-foreground">Email</p>
             <p className="mt-1 text-base font-semibold text-foreground">{c?.email || "Not provided"}</p>
@@ -208,14 +364,43 @@ export function PersonalInfoScreen({ userId, onBack }: { userId: string; onBack:
         </div>
 
         <p className="mb-2 px-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Location Settings</p>
-        <div className="overflow-hidden rounded-[18px] bg-card card-shadow">
-          <div className="flex items-center justify-between border-b border-border p-4">
-            <div>
-              <p className="text-sm font-semibold text-foreground">Current City</p>
-              <p className="mt-0.5 text-xs text-muted-foreground">{c?.location || "Unknown"}</p>
+        <div className="overflow-hidden rounded-[18px] bg-card card-shadow mb-6">
+          {/* Current City */}
+          <div className="border-b border-border p-4">
+            <div className="flex items-center justify-between">
+              <div className="flex-1 pr-3">
+                <p className="text-sm font-semibold text-foreground">Current City</p>
+                {isEditing ? (
+                  <input
+                    ref={locationRef}
+                    type="text"
+                    value={location}
+                    onChange={(e) => setLocation(e.target.value)}
+                    placeholder="Enter city (e.g., Bnglr)"
+                    className="mt-1.5 w-full rounded-xl border border-primary/40 bg-primary/5 px-3.5 py-2 text-sm font-medium text-foreground focus:border-primary focus:bg-card focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all shadow-inner"
+                  />
+                ) : (
+                  <p className="mt-0.5 text-xs text-muted-foreground">{location || c?.location || "Unknown"}</p>
+                )}
+              </div>
+              {isEditing ? (
+                <MapPin className="h-5 w-5 text-primary shrink-0 self-center" />
+              ) : (
+                <div className="flex items-center gap-2">
+                  <MapPin className="h-5 w-5 text-primary shrink-0" />
+                  <button
+                    onClick={() => handleEditClick("location")}
+                    className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary hover:bg-primary/20 active:scale-95 transition-all scale-tap"
+                    title="Edit Location"
+                  >
+                    <Pencil className="h-4 w-4" />
+                  </button>
+                </div>
+              )}
             </div>
-            <MapPin className="h-5 w-5 text-primary" />
           </div>
+
+          {/* GPS Permission */}
           <div className="flex items-center justify-between p-4">
             <div>
               <p className="text-sm font-semibold text-foreground">GPS Permission</p>
@@ -226,7 +411,52 @@ export function PersonalInfoScreen({ userId, onBack }: { userId: string; onBack:
             </div>
           </div>
         </div>
-        
+
+        {/* Update / Action Buttons */}
+        {isEditing ? (
+          <div className="mt-4 flex gap-3 animate-fade-in">
+            <button
+              onClick={() => {
+                setIsEditing(false);
+                setName(c?.name || "");
+                setPhone(c?.phone || "");
+                setLocation(c?.location || "");
+              }}
+              disabled={isSaving}
+              className="flex-1 rounded-2xl border border-border bg-card py-3.5 text-sm font-bold text-muted-foreground hover:bg-muted active:scale-95 transition-all scale-tap"
+            >
+              Cancel
+            </button>
+            <button
+              onClick={handleSave}
+              disabled={isSaving || !name.trim()}
+              className="flex-[2] flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-primary to-primary/90 py-3.5 text-sm font-bold text-white shadow-lg shadow-primary/25 hover:opacity-95 active:scale-95 transition-all scale-tap disabled:opacity-50"
+            >
+              {isSaving ? (
+                <>
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                  <span>Updating...</span>
+                </>
+              ) : (
+                <>
+                  <Check className="h-4 w-4" />
+                  <span>Update Profile</span>
+                </>
+              )}
+            </button>
+          </div>
+        ) : (
+          <div className="mt-4">
+            <button
+              onClick={() => setIsEditing(true)}
+              className="w-full flex items-center justify-center gap-2 rounded-2xl border border-primary/30 bg-primary/10 py-3.5 text-sm font-bold text-primary hover:bg-primary/15 active:scale-95 transition-all scale-tap"
+            >
+              <Pencil className="h-4 w-4" />
+              <span>Edit Personal Info</span>
+            </button>
+          </div>
+        )}
+
       </div>
     </div>
   );
@@ -396,7 +626,7 @@ export function AboutScreen({ onBack, onNavigate }: { onBack: () => void; onNavi
         </div>
         <h2 className="text-2xl font-extrabold text-foreground">CUTZO</h2>
         <p className="text-sm font-medium text-muted-foreground">Booking Hub</p>
-        <p className="mt-2 text-xs font-bold uppercase tracking-widest text-primary">Version 1.0.0</p>
+        <p className="mt-2 text-xs font-bold uppercase tracking-widest text-primary">Version {typeof __APP_VERSION__ !== 'undefined' ? __APP_VERSION__ : '1.0.0'}</p>
         
         <div className="mx-auto mt-8 max-w-xs text-sm text-muted-foreground leading-relaxed">
           CUTZO simplifies barber shop bookings. Our mission is to connect customers with the best grooming professionals seamlessly.
