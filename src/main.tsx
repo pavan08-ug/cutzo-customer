@@ -7,8 +7,8 @@ import { LoadingProvider } from "./components/cutzo/LoadingContext";
 import useFirebaseAuth from "./lib/useFirebaseAuth";
 
 // Permanent fallback ensures ConvexReactClient never crashes on startup
-// even if .env.local is missing or npx convex dev hasn't been run yet.
-const convexUrl = import.meta.env.VITE_CONVEX_URL || "https://cutzo-fallback.convex.cloud";
+// and always connects to the live production database (adamant-condor-357) if .env is missing.
+const convexUrl = import.meta.env.VITE_CONVEX_URL || "https://adamant-condor-357.convex.cloud";
 const convex = new ConvexReactClient(convexUrl);
 
 createRoot(document.getElementById("root")!).render(
