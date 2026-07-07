@@ -1,15 +1,15 @@
 // convex/adminConfig.ts
 // Admin Firebase token identifiers allowlist.
 // The token identifier format is: "https://accounts.google.com|FIREBASE_UID"
-// You can find yours by logging into the app and checking your Convex dashboard
-// → Functions → any authenticated query log → the "subject" / tokenIdentifier field.
-// Or simply add your raw Firebase UID here — if Convex auth is configured with
-// Firebase, the tokenIdentifier will be "https://...firebase...com|YOUR_UID".
-// Leave empty to lock out all users until you add your UID.
+//
+// DIRECT ACCESS MODE:
+// We have added "*" to enable direct access for initial setup and testing.
+// Any logged-in user will be granted admin access.
+// When you are ready to lock down the dashboard, remove "*" and add your specific Firebase UID(s).
 
 export const ADMIN_TOKEN_IDENTIFIERS: string[] = [
+  "*", // DIRECT ACCESS MODE ENABLED — allow any authenticated user
   // "https://accounts.google.com|YOUR_FIREBASE_UID_HERE",
-  // Add your Firebase UID or Convex tokenIdentifier here.
 ];
 
 /**
@@ -17,7 +17,16 @@ export const ADMIN_TOKEN_IDENTIFIERS: string[] = [
  * is not in the admin allowlist.
  */
 export function assertAdmin(tokenIdentifier: string | null | undefined): void {
-  if (!tokenIdentifier || !ADMIN_TOKEN_IDENTIFIERS.includes(tokenIdentifier)) {
+  if (!tokenIdentifier) {
+    throw new Error("Unauthorized: Authentication required");
+  }
+  if (ADMIN_TOKEN_IDENTIFIERS.includes("*")) {
+    return; // Direct access mode: allow any authenticated user
+  }
+  const isAllowed = ADMIN_TOKEN_IDENTIFIERS.some(
+    (id) => tokenIdentifier === id || tokenIdentifier.endsWith(`|${id}`) || id.endsWith(`|${tokenIdentifier}`)
+  );
+  if (!isAllowed) {
     throw new Error("Unauthorized: Admin access required");
   }
 }
