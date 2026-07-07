@@ -336,47 +336,6 @@ export const adminGetLiveOperations = query({
   },
 });
 
-/** System health: stale sessions, OTP count, rate limits, pending bookings. */
-export const adminGetSystemHealth = query({
-  args: {},
-  handler: async (ctx) => {
-    await getAdminIdentity(ctx);
-    const now = Date.now();
-
-    const activeWalkIns = await ctx.db
-      .query("walkIns")
-      .withIndex("by_status", (q) => q.eq("status", "active"))
-      .take(500);
-    const staleWalkIns = activeWalkIns.filter((w: any) => w.calculatedFinishTime < now);
-
-    const activeOtps = await ctx.db.query("otps").take(200);
-    const validOtps = activeOtps.filter((o: any) => o.expiresAt > now);
-
-    const rateLimits = await ctx.db.query("rateLimits").take(1000);
-    const oneHourAgo = now - 3600000;
-    const recentRateLimits = rateLimits.filter((r: any) => r.timestamp > oneHourAgo);
-
-    const thirtyMinsAgo = now - 30 * 60 * 1000;
-    const pendingBookings = await ctx.db
-      .query("bookings")
-      .filter((q) => q.eq(q.field("status"), "pending"))
-      .take(500);
-    const stalePending = pendingBookings.filter(
-      (b: any) => b._creationTime < thirtyMinsAgo
-    );
-
-    const blockedDatesCount = await ctx.db.query("blockedDates").take(500);
-
-    return {
-      staleWalkInsCount: staleWalkIns.length,
-      staleWalkIns: staleWalkIns.slice(0, 10),
-      activeOtpCount: validOtps.length,
-      recentRateLimitHits: recentRateLimits.length,
-      stalePendingBookings: stalePending.length,
-      blockedDatesCount: blockedDatesCount.length,
-    };
-  },
-});
 
 /** Paginated admin activity log. */
 export const adminGetActivityLog = query({
