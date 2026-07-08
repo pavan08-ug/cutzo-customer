@@ -52,9 +52,11 @@ export default function KPICard({ icon, label, value, color, bg, prefix = "", su
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.07, duration: 0.4, ease: "easeOut" }}
     >
-      <div className="admin-kpi-icon" style={{ background: bg }}>
-        <span>{icon}</span>
-      </div>
+      {icon && icon.trim() !== "" && (
+        <div className="admin-kpi-icon" style={{ background: bg }}>
+          <span>{icon}</span>
+        </div>
+      )}
       <div className="admin-kpi-value" style={{ color }}>{display}</div>
       <div className="admin-kpi-label">{label}</div>
     </motion.div>

@@ -144,7 +144,6 @@ export default function AdminGuard({ children }: Props) {
       return (
         <div className="admin-root" style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "100dvh", background: "#09090b" }}>
           <div className="admin-card" style={{ maxWidth: 480, textAlign: "center", padding: 36 }}>
-            <div style={{ fontSize: 48, marginBottom: 16 }}>🔐</div>
             <h2 style={{ fontSize: 20, fontWeight: 700, marginBottom: 8, color: "#f8fafc" }}>Admin Panel Setup Required</h2>
             <p style={{ color: "#64748b", fontSize: 14, lineHeight: 1.6 }}>
               The admin allowlist is empty. Open <code style={{ background: "rgba(255,255,255,0.08)", padding: "2px 6px", borderRadius: 4, color: "#a78bfa" }}>convex/adminConfig.ts</code> and add your Firebase UID or set <code style={{ background: "rgba(255,255,255,0.08)", padding: "2px 6px", borderRadius: 4, color: "#34d399" }}>"*"</code> for direct access.
