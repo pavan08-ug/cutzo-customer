@@ -1,6 +1,7 @@
 import { useMutation, usePaginatedQuery, useQuery } from "convex/react";
 import { format, formatDistanceToNow } from "date-fns";
 import {
+  AlertTriangle,
   ArrowLeft,
   Bell,
   Bookmark,
@@ -14,6 +15,7 @@ import {
   Scissors,
   Shield,
   Tag,
+  Trash2,
   X,
 } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
@@ -21,7 +23,8 @@ import { api } from "../../../convex/_generated/api";
 import { TermsAndConditions, PrivacyPolicy } from "./LegalContent";
 import { Screen } from "./types";
 import { openExternalUrl } from "../../lib/utils";
-import { saveCustomer } from "./authStorage";
+import { clearCustomerSession, getActiveCustomer, saveCustomer } from "./authStorage";
+
 
 
 
@@ -553,18 +556,164 @@ export function NotificationsScreen({ userId, onBack }: { userId: string; onBack
 
 // ─── Static Policy Screens ─────────────────────────────────────────────────
 
+export function DeleteAccountScreen({ onBack }: { onBack: () => void }) {
+  const activeCustomer = getActiveCustomer();
+  const deleteAccountMutation = useMutation(api.users.deleteUserAccount);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
+
+  const handleConfirmDelete = async () => {
+    if (!activeCustomer) {
+      setErrorMsg("No active session found.");
+      return;
+    }
+    setIsDeleting(true);
+    setErrorMsg("");
+    try {
+      await deleteAccountMutation({ uid: activeCustomer.id });
+      clearCustomerSession();
+      window.location.href = "/";
+    } catch (err: any) {
+      setErrorMsg(err.message || "Could not delete account. Please verify your connection or contact support.");
+      setIsDeleting(false);
+    }
+  };
+
+  return (
+    <div className="flex h-[100dvh] flex-col bg-muted">
+      <ScreenHeader title="Delete Account & Data" onBack={onBack} />
+      <div className="flex-1 overflow-y-auto px-4 pt-4" style={{ paddingBottom: "calc(80px + env(safe-area-inset-bottom, 0px))" }}>
+        <div className="space-y-4">
+          <div className="rounded-[18px] bg-card p-5 card-shadow space-y-3 border border-destructive/20">
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-destructive/10">
+                <Trash2 className="h-5 w-5 text-destructive" />
+              </div>
+              <div>
+                <h3 className="text-base font-extrabold text-foreground">Right to Erasure</h3>
+                <p className="text-xs text-muted-foreground">Permanent Account &amp; Data Deletion</p>
+              </div>
+            </div>
+            <p className="text-xs text-foreground/80 leading-relaxed">
+              In compliance with the Digital Personal Data Protection Act, 2023 and Google Play Store data guidelines, you may permanently delete your Cutzo account and erase all associated personal data from our systems.
+            </p>
+          </div>
+
+          <div className="rounded-[18px] bg-card p-5 card-shadow space-y-3">
+            <h4 className="text-sm font-bold text-foreground">What happens when you delete your account:</h4>
+            <ul className="space-y-2.5 text-xs text-muted-foreground">
+              <li className="flex items-start gap-2">
+                <span className="text-destructive font-bold">&bull;</span>
+                <span><strong>Instant Deletion:</strong> Your name, phone number, email address, profile photo, and Firebase UID are permanently deleted from our active database.</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-destructive font-bold">&bull;</span>
+                <span><strong>Notifications &amp; Saved Shops:</strong> All push notification tokens, reminders, and bookmarked shops are purged.</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-destructive font-bold">&bull;</span>
+                <span><strong>Past Bookings:</strong> Your name and contact details on past booking history are anonymized (replaced with &quot;Deleted User&quot;) to maintain necessary financial/tax transaction records for partner salons for 3 years.</span>
+              </li>
+            </ul>
+          </div>
+
+          {errorMsg && (
+            <div className="rounded-[14px] bg-destructive/10 p-3 text-xs font-semibold text-destructive flex items-center gap-2 border border-destructive/20">
+              <AlertTriangle className="h-4 w-4 shrink-0" />
+              <span>{errorMsg}</span>
+            </div>
+          )}
+
+          <div className="pt-2">
+            <button
+              onClick={() => setShowConfirmModal(true)}
+              disabled={!activeCustomer}
+              className="w-full rounded-[16px] bg-destructive py-3.5 text-sm font-bold text-white shadow-lg shadow-destructive/20 scale-tap active:scale-[0.98] transition-transform disabled:opacity-50"
+            >
+              {activeCustomer ? "Delete My Account & Personal Data" : "Please Log In to Delete Account"}
+            </button>
+          </div>
+
+          <p className="text-center text-[11px] text-muted-foreground pt-2">
+            Need manual assistance? Email our Grievance Officer at <a href="mailto:cutzosaloon@gmail.com" className="text-primary font-semibold underline">cutzosaloon@gmail.com</a> or visit our <a href="/delete-account" className="text-primary font-semibold underline">Online Deletion Portal</a>.
+          </p>
+        </div>
+      </div>
+
+      {showConfirmModal && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/70 p-4 backdrop-blur-sm animate-fade-in">
+          <div className="w-full max-w-sm rounded-[24px] bg-card p-6 shadow-2xl border border-border space-y-4 animate-scale-in">
+            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-destructive/10">
+              <AlertTriangle className="h-7 w-7 text-destructive" />
+            </div>
+            <div className="text-center space-y-1.5">
+              <h3 className="text-lg font-extrabold text-foreground">Are you absolutely sure?</h3>
+              <p className="text-xs text-muted-foreground leading-relaxed">
+                This action is irreversible. Your Cutzo profile ({activeCustomer?.name}) and all associated personal records will be immediately erased.
+              </p>
+            </div>
+            <div className="flex gap-3 pt-2">
+              <button
+                onClick={() => setShowConfirmModal(false)}
+                disabled={isDeleting}
+                className="flex-1 rounded-[14px] bg-muted py-3 text-xs font-bold text-foreground scale-tap"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleConfirmDelete}
+                disabled={isDeleting}
+                className="flex-1 rounded-[14px] bg-destructive py-3 text-xs font-bold text-white shadow-md shadow-destructive/25 scale-tap flex items-center justify-center gap-1.5"
+              >
+                {isDeleting ? <Loader2 className="h-4 w-4 animate-spin" /> : "Yes, Delete"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 export function PrivacyScreen({ onBack }: { onBack: () => void }) {
+  const [showDeleteScreen, setShowDeleteScreen] = useState(false);
+
+  if (showDeleteScreen) {
+    return <DeleteAccountScreen onBack={() => setShowDeleteScreen(false)} />;
+  }
+
   return (
     <div className="flex h-[100dvh] flex-col bg-muted">
       <ScreenHeader title="Privacy Policy" onBack={onBack} />
       <div className="flex-1 overflow-y-auto px-4 pt-4" style={{ paddingBottom: "calc(80px + env(safe-area-inset-bottom, 0px))" }}>
-        <div className="rounded-[18px] bg-card p-5 card-shadow">
-          <PrivacyPolicy />
+        <div className="space-y-4">
+          <div className="rounded-[18px] bg-card p-5 card-shadow">
+            <PrivacyPolicy />
+          </div>
+          <div className="rounded-[18px] bg-destructive/5 p-4 card-shadow border border-destructive/20 flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-destructive/10">
+                <Trash2 className="h-5 w-5 text-destructive" />
+              </div>
+              <div>
+                <p className="text-sm font-bold text-destructive">Right to Erasure</p>
+                <p className="text-xs text-muted-foreground">Delete your account &amp; personal data</p>
+              </div>
+            </div>
+            <button
+              onClick={() => setShowDeleteScreen(true)}
+              className="rounded-xl bg-destructive px-3.5 py-2 text-xs font-bold text-white shadow-md shadow-destructive/20 scale-tap"
+            >
+              Manage
+            </button>
+          </div>
         </div>
       </div>
     </div>
   );
 }
+
 
 export function TermsScreen({ onBack }: { onBack: () => void }) {
   return (

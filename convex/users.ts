@@ -70,22 +70,74 @@ export const deleteUserAccount = mutation({
     if (!identity) throw new Error("Unauthenticated");
     if (identity.subject !== args.uid) throw new Error("Unauthorized");
 
-    const user = await ctx.db
+    const allUsers = await ctx.db
       .query("users")
       .withIndex("by_uid", (q) => q.eq("uid", args.uid))
-      .first();
+      .collect();
 
-    if (!user) throw new Error("User not found");
+    if (allUsers.length === 0) throw new Error("User not found");
 
-    // LEG-07 FIX: Delete personal data to comply with "Right to Erasure"
-    // Here we hard-delete the user record containing PII.
-    // In a full implementation, you would also delete or anonymize related
-    // bookings, reviews, and notifications in a background job or here.
-    await ctx.db.delete(user._id);
+    for (const u of allUsers) {
+      await ctx.db.delete(u._id);
+    }
+
+    // Delete user notifications
+    const notifications = await ctx.db
+      .query("notifications")
+      .withIndex("by_user", (q) => q.eq("userId", args.uid))
+      .collect();
+    for (const n of notifications) {
+      await ctx.db.delete(n._id);
+    }
+
+    // Delete saved shops bookmarks
+    const savedShops = await ctx.db
+      .query("savedShops")
+      .withIndex("by_user", (q) => q.eq("userId", args.uid))
+      .collect();
+    for (const s of savedShops) {
+      await ctx.db.delete(s._id);
+    }
+
+    // Anonymize personal info on past bookings to comply with right to erasure
+    // while retaining anonymous transaction records for statutory dispute/accounting
+    const bookings = await ctx.db
+      .query("bookings")
+      .withIndex("by_customer", (q) => q.eq("customerId", args.uid))
+      .collect();
+    for (const b of bookings) {
+      await ctx.db.patch(b._id, {
+        customerName: "Deleted User",
+        customerPhone: undefined,
+      });
+    }
 
     return { success: true };
   },
 });
+
+export const requestAccountDeletion = mutation({
+  args: {
+    phoneOrEmail: v.string(),
+    reason: v.optional(v.string()),
+  },
+  handler: async (ctx, args) => {
+    const cleanContact = args.phoneOrEmail.trim();
+    if (!cleanContact) {
+      throw new Error("Phone number or email is required");
+    }
+
+    const requestId = await ctx.db.insert("accountDeletionRequests", {
+      phoneOrEmail: cleanContact,
+      reason: args.reason,
+      status: "pending",
+      requestedAt: Date.now(),
+    });
+
+    return { success: true, requestId };
+  },
+});
+
 
 export const updateUserProfile = mutation({
   args: {

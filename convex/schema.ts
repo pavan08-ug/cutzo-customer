@@ -207,4 +207,14 @@ export default defineSchema({
     description: v.string(),
     createdAt: v.number(),
   }).index("by_created", ["createdAt"]),
+
+  // Account deletion requests submitted via web form or app
+  accountDeletionRequests: defineTable({
+    phoneOrEmail: v.string(),
+    reason: v.optional(v.string()),
+    status: v.union(v.literal("pending"), v.literal("verified"), v.literal("completed"), v.literal("cancelled")),
+    requestedAt: v.number(),
+    completedAt: v.optional(v.number()),
+  }).index("by_status", ["status"]).index("by_phone_email", ["phoneOrEmail"]),
 });
+

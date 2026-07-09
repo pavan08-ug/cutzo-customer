@@ -8,6 +8,7 @@ import {
   MapPin,
   Shield,
   Tag,
+  Trash2,
 } from "lucide-react";
 import { CustomerRecord, Screen } from "./types";
 
@@ -42,8 +43,10 @@ export default function ProfileScreen({ user, onNavigate, onLogout }: Props) {
       title: "Settings",
       items: [
         { icon: Shield, label: "Privacy & Security", sub: "Control your account access", screen: "privacy" as Screen },
+        { icon: Trash2, label: "Delete Account & Data", sub: "Right to erasure & data policy", screen: "deleteAccount" as Screen },
       ],
     },
+
     {
       title: "Support",
       items: [

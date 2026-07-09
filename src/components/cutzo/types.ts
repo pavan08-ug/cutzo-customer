@@ -19,7 +19,9 @@ export type Screen =
   | "help"
   | "about"
   | "shopLogin"
-  | "registerShop";
+  | "registerShop"
+  | "deleteAccount";
+
 
 export interface Shop {
   id: string;

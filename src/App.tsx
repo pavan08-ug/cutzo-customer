@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { Capacitor } from "@capacitor/core";
 import Index from "./pages/Index.tsx";
 import AdminDashboard from "./pages/AdminDashboard.tsx";
+import DeleteAccount from "./pages/DeleteAccount.tsx";
 
 const queryClient = new QueryClient();
 
@@ -20,12 +21,14 @@ const App = () => (
       <AppRouter>
         <Routes>
           <Route path="/admin/*" element={<AdminDashboard />} />
+          <Route path="/delete-account" element={<DeleteAccount />} />
           <Route path="/*" element={<Index />} />
         </Routes>
       </AppRouter>
     </TooltipProvider>
   </QueryClientProvider>
 );
+
 
 export default App;
 

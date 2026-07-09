@@ -313,6 +313,7 @@ function AppInner() {
         terms: "about",
         help: "profile",
         about: "profile",
+        deleteAccount: "profile",
         value: "value", // stay on value (welcome) — no exit
       };
 
@@ -418,6 +419,11 @@ function AppInner() {
     }
     if (nextScreen === "terms") {
       openExternalUrl("https://cutzolife.in/terms");
+      return;
+    }
+    if (nextScreen === "deleteAccount") {
+      setNavDir(dir);
+      navigate("/delete-account");
       return;
     }
 
