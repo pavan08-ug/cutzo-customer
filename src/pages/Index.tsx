@@ -18,12 +18,6 @@ import SplashScreen from "@/components/cutzo/SplashScreen";
 import SuccessScreen from "@/components/cutzo/SuccessScreen";
 import {
   AboutScreen,
-<<<<<<< HEAD
-  TeamScreen,
-  PavanProfileScreen,
-  NadeemProfileScreen,
-=======
->>>>>>> origin/main
   HelpScreen,
   NotificationsScreen,
   OffersScreen,
@@ -756,31 +750,6 @@ function AppInner() {
               onBack={() => navigateTo("profile", "back")}
               onOpenTerms={() => navigateTo("terms")}
               onOpenPrivacy={() => navigateTo("privacy")}
-<<<<<<< HEAD
-              onOpenTeam={() => navigateTo("team")}
-            />
-          )}
-
-          {screen === "team" && (
-            <TeamScreen
-              onBack={() => navigateTo("about", "back")}
-              onSelectFounder={(founder) => navigateTo(founder)}
-            />
-          )}
-
-          {screen === "pavan" && (
-            <PavanProfileScreen
-              onBack={() => navigateTo("team", "back")}
-              onOpenNadeem={() => navigateTo("nadeem")}
-            />
-          )}
-
-          {screen === "nadeem" && (
-            <NadeemProfileScreen
-              onBack={() => navigateTo("team", "back")}
-              onOpenPavan={() => navigateTo("pavan")}
-=======
->>>>>>> origin/main
             />
           )}
 
