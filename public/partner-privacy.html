@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy - Cutzo Partner</title>
+  <meta name="description" content="Privacy Policy for Cutzo Partner application. How Cutzo collects, uses, and protects partner and customer information for salon and barbershop owners.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #7c4dff;
+      --primary-light: #9c6dff;
+      --primary-glow: rgba(124, 77, 255, 0.2);
+      --bg: #0b0f19;
+      --card-bg: #151c2c;
+      --card-border: #232d42;
+      --section-bg: rgba(255,255,255,0.025);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-sub: #cbd5e1;
+      --green: #10b981;
+      --warn: #f59e0b;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.7;
+      padding: 32px 16px;
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 44px;
+      box-shadow: 0 24px 48px -16px rgba(0,0,0,0.6), 0 0 40px var(--primary-glow);
+    }
+
+    /* Header */
+    header { border-bottom: 1px solid var(--card-border); padding-bottom: 32px; margin-bottom: 36px; }
+    .badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--primary-glow); color: #b388ff;
+      font-size: 11px; font-weight: 700; padding: 5px 14px;
+      border-radius: 20px; text-transform: uppercase; letter-spacing: 0.6px;
+      margin-bottom: 16px; border: 1px solid rgba(124,77,255,0.3);
+    }
+    h1 { font-size: 28px; font-weight: 800; color: var(--text-main); margin-bottom: 6px; letter-spacing: -0.5px; }
+    .subtitle { font-size: 14px; color: var(--text-muted); margin-bottom: 4px; }
+    .date-meta { font-size: 13px; color: var(--text-muted); font-weight: 500; margin-top: 8px; }
+
+    /* AI Disclaimer Banner */
+    .ai-notice {
+      background: rgba(245, 158, 11, 0.08);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin-bottom: 32px;
+      font-size: 12px;
+      color: #fcd34d;
+      line-height: 1.6;
+    }
+    .ai-notice strong { color: #f59e0b; }
+
+    /* TOC */
+    .toc {
+      background: var(--section-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 24px 28px;
+      margin-bottom: 40px;
+    }
+    .toc h3 {
+      font-size: 13px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.5px; color: var(--primary-light); margin-bottom: 14px;
+    }
+    .toc ol { padding-left: 18px; }
+    .toc li { font-size: 13px; color: var(--text-muted); margin-bottom: 5px; }
+    .toc a { color: var(--text-muted); text-decoration: none; }
+    .toc a:hover { color: var(--primary-light); text-decoration: underline; }
+
+    /* Intro block */
+    .intro {
+      font-size: 14.5px; color: var(--text-sub);
+      background: rgba(255,255,255,0.03);
+      border-left: 4px solid var(--primary);
+      padding: 18px 22px; border-radius: 0 12px 12px 0;
+      margin-bottom: 40px;
+    }
+
+    /* Sections */
+    section { margin-bottom: 40px; }
+    h2 {
+      font-size: 17px; font-weight: 700; color: var(--text-main);
+      margin-bottom: 14px; display: flex; align-items: center; gap: 10px;
+    }
+    h2 span.sec-num {
+      background: var(--primary); color: #fff;
+      font-size: 11px; font-weight: 800;
+      min-width: 28px; height: 26px; border-radius: 8px;
+      display: inline-flex; align-items: center; justify-content: center;
+      flex-shrink: 0; padding: 0 6px;
+    }
+    p { font-size: 14px; color: var(--text-sub); margin-bottom: 12px; }
+    ul, ol { padding-left: 22px; margin-bottom: 14px; }
+    li { font-size: 14px; color: var(--text-sub); margin-bottom: 8px; }
+    strong { color: var(--text-main); }
+    a { color: #b388ff; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* Confirm tags */
+    .confirm {
+      display: inline-block;
+      background: rgba(245,158,11,0.1);
+      border: 1px solid rgba(245,158,11,0.3);
+      color: #fbbf24;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-style: normal;
+    }
+
+    /* Contact Card */
+    .contact-card {
+      background: rgba(124,77,255,0.07);
+      border: 1px solid rgba(124,77,255,0.25);
+      border-radius: 16px;
+      padding: 28px;
+      margin-top: 44px;
+    }
+    .contact-card h3 { font-size: 16px; font-weight: 700; color: var(--text-main); margin-bottom: 14px; }
+    .contact-row { display: flex; flex-direction: column; gap: 8px; }
+    .contact-item { font-size: 13.5px; color: var(--text-sub); }
+    .contact-item strong { color: #d1c4e9; min-width: 130px; display: inline-block; }
+
+    /* Checklist section */
+    .checklist { background: rgba(245,158,11,0.06); border: 1px solid rgba(245,158,11,0.2); border-radius: 14px; padding: 24px; }
+    .checklist h3 { font-size: 14px; font-weight: 700; color: #f59e0b; margin-bottom: 14px; }
+    .checklist li { font-size: 13px; color: #fcd34d; margin-bottom: 7px; }
+
+    /* Legal note footer box */
+    .legal-note {
+      background: rgba(124,77,255,0.06);
+      border: 1px solid rgba(124,77,255,0.2);
+      border-radius: 12px;
+      padding: 18px 22px;
+      margin-top: 36px;
+      font-size: 12.5px;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    footer {
+      text-align: center; margin-top: 40px; padding-top: 24px;
+      border-top: 1px solid var(--card-border);
+      font-size: 12px; color: var(--text-muted);
+    }
+
+    @media (max-width: 640px) {
+      body { padding: 10px 6px; }
+      .container { padding: 22px 16px; border-radius: 16px; }
+      h1 { font-size: 22px; }
+      h2 { font-size: 15px; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Header -->
+  <header>
+    <div class="badge">Cutzo Partner Legal Document</div>
+    <h1>Cutzo Partner — Privacy Policy</h1>
+    <div class="subtitle">How Cutzo Collects, Uses, and Protects Partner and Customer Information</div>
+    <div class="date-meta">
+      Effective Date: <span class="confirm">TO BE PROVIDED</span> &nbsp;|&nbsp;
+      Last Updated: <span class="confirm">TO BE PROVIDED</span>
+    </div>
+  </header>
+
+  <!-- AI Notice -->
+  <div class="ai-notice">
+    <strong>⚠ Legal Review Required:</strong> This Privacy Policy is an AI-assisted drafting document. It has not been prepared or reviewed by a licensed Indian privacy/data-protection lawyer and must be reviewed, verified, and approved by qualified counsel before it is published or relied upon. Items marked <span style="background:rgba(245,158,11,0.15);padding:1px 6px;border-radius:4px;color:#fbbf24;font-size:11px;font-weight:600;">TO BE CONFIRMED</span> require Cutzo's input before publication.
+  </div>
+
+  <!-- Table of Contents -->
+  <div class="toc">
+    <h3>Table of Contents</h3>
+    <ol>
+      <li><a href="#s1">Introduction</a></li>
+      <li><a href="#s2">Scope</a></li>
+      <li><a href="#s3">Who We Are</a></li>
+      <li><a href="#s4">Information We Collect</a></li>
+      <li><a href="#s5">Information Collected During Partner Registration</a></li>
+      <li><a href="#s6">Partner Application and Verification</a></li>
+      <li><a href="#s7">Information Collected After Approval</a></li>
+      <li><a href="#s8">Booking and OTP Information</a></li>
+      <li><a href="#s9">Technical and Device Information</a></li>
+      <li><a href="#s10">How We Use Information</a></li>
+      <li><a href="#s11">Legal Grounds / Lawful Processing</a></li>
+      <li><a href="#s12">Information Sharing</a></li>
+      <li><a href="#s13">Third-Party Service Providers</a></li>
+      <li><a href="#s14">Authentication Providers</a></li>
+      <li><a href="#s15">Data Retention</a></li>
+      <li><a href="#s16">Data Security</a></li>
+      <li><a href="#s17">Data Breach / Security Incidents</a></li>
+      <li><a href="#s18">Partner Privacy Rights</a></li>
+      <li><a href="#s19">Consent and Withdrawal</a></li>
+      <li><a href="#s20">Grievance Redressal</a></li>
+      <li><a href="#s21">Children's Data</a></li>
+      <li><a href="#s22">International Data Transfers</a></li>
+      <li><a href="#s23">Marketing Communications</a></li>
+      <li><a href="#s24">Partner Responsibilities Regarding Customer Data</a></li>
+      <li><a href="#s25">Third-Party Links</a></li>
+      <li><a href="#s26">Changes to This Privacy Policy</a></li>
+      <li><a href="#s27">Governing Law</a></li>
+      <li><a href="#s28">Contact Us</a></li>
+      <li><a href="#s29">Information Cutzo Must Provide Before Publication</a></li>
+      <li><a href="#s30">Final Legal Review Note</a></li>
+    </ol>
+  </div>
+
+  <!-- Section 1 -->
+  <section id="s1">
+    <h2><span class="sec-num">1</span> Introduction</h2>
+    <p>This Privacy Policy explains how Cutzo ("Cutzo", "we", "us", or "our") collects, uses, shares, and protects information in connection with the Cutzo Partner App (the "Partner App"), which is used by salon and barber-shop owners and their authorised representatives ("Partners", "you") to apply to become, and subsequently operate as, a Cutzo Partner.</p>
+    <p>Cutzo is committed to being transparent about what information it actually collects through the Partner App and why. This Policy is written specifically for the Cutzo Partner App and its actual registration, verification, and Partner-operation workflows. Wherever a specific detail could not be confirmed against the actual, current behaviour of the Partner App, this Policy marks it clearly as <span class="confirm">TO BE CONFIRMED BY CUTZO</span> rather than assuming what a typical salon-booking app might do.</p>
+    <p>This Privacy Policy should be read together with the <strong>Cutzo Partner Terms &amp; Conditions</strong>, which govern your use of the Partner App and the Cutzo Partner application/approval process.</p>
+  </section>
+
+  <!-- Section 2 -->
+  <section id="s2">
+    <h2><span class="sec-num">2</span> Scope</h2>
+    <p>This Policy applies to personal information processed through the Cutzo Partner App, including information collected from:</p>
+    <ul>
+      <li>Individuals applying to become a Cutzo Partner ("Applicants");</li>
+      <li>Approved Cutzo Partners and their authorised staff/Administrators who use the Partner App; and</li>
+      <li>Limited Customer information that a Partner may receive through the Partner App in order to fulfil a booking.</li>
+    </ul>
+    <p>This Policy does not separately describe the Cutzo Customer App's privacy practices, which are addressed in Cutzo's Customer Privacy Policy. Where this Policy refers to a Cutzo website (as distinct from the Partner App), the applicable practices for that website may be described separately.</p>
+  </section>
+
+  <!-- Section 3 -->
+  <section id="s3">
+    <h2><span class="sec-num">3</span> Who We Are</h2>
+    <p>The Cutzo Partner App is operated by <span class="confirm">LEGAL ENTITY NAME</span>, having its registered office at <span class="confirm">REGISTERED OFFICE ADDRESS</span> ("Cutzo"). For queries about this Policy or Cutzo's data practices, see Section 28 (Contact Us).</p>
+    <p>Cutzo operates a technology platform that connects Customers with independent, third-party salons and barber shops. Cutzo does not itself provide salon or barber services; those are provided directly by Partners as independent businesses. The precise legal classification of Cutzo and Partners under Indian data-protection law is noted as <span class="confirm">LEGAL CLASSIFICATION TO BE CONFIRMED BY CUTZO COUNSEL</span> rather than asserted definitively in this Policy.</p>
+  </section>
+
+  <!-- Section 4 -->
+  <section id="s4">
+    <h2><span class="sec-num">4</span> Information We Collect</h2>
+    <p>Cutzo collects information about Applicants and Partners at different stages of the Partner relationship:</p>
+    <ul>
+      <li>At initial registration/application</li>
+      <li>During any subsequent verification</li>
+      <li>After approval, in the ordinary course of operating as a Partner</li>
+      <li>Automatically, through use of the Partner App</li>
+    </ul>
+    <p>Sections 5 through 9 describe each of these categories separately. This Policy does not assume that all categories described below are collected from every Applicant or at every stage.</p>
+  </section>
+
+  <!-- Section 5 -->
+  <section id="s5">
+    <h2><span class="sec-num">5</span> Information Collected During Partner Registration</h2>
+    <p>When you apply to become a Cutzo Partner, we collect the information you provide through the Partner App to create and process your application. This may include:</p>
+    <ul>
+      <li>Owner/applicant name</li>
+      <li>Shop/salon name</li>
+      <li>Contact details, such as phone number and/or email address</li>
+      <li>Shop address and/or shop location, if requested at this stage</li>
+      <li>Basic account/authentication information, such as information received from a sign-in method you choose to use (see Section 14)</li>
+    </ul>
+    <p>Registration is not the same as full business verification. At the point of initial registration, Cutzo does not necessarily collect documents such as government-issued identity documents, GST certificates, bank account details, or shop photographs unless the Partner App's current registration flow actually requests these.</p>
+    <p><span class="confirm">EXACT REGISTRATION FIELDS TO BE CONFIRMED BY CUTZO</span></p>
+  </section>
+
+  <!-- Section 6 -->
+  <section id="s6">
+    <h2><span class="sec-num">6</span> Partner Application and Verification</h2>
+    <p>Submitting a registration/application through the Partner App does not automatically make the Applicant a Cutzo Partner. After an Application is submitted, the following may occur:</p>
+    <ul>
+      <li>Cutzo reviews the information submitted in the Application</li>
+      <li>Cutzo may contact the Applicant to ask clarifying questions or request additional information</li>
+      <li>Cutzo may conduct further verification, which may include contacting the Applicant and/or visiting the physical shop premises</li>
+      <li>Based on this review, Cutzo approves or rejects the Application</li>
+    </ul>
+    <p>The exact categories of information typically requested during verification: <span class="confirm">EXACT VERIFICATION INFORMATION TO BE CONFIRMED</span></p>
+  </section>
+
+  <!-- Section 7 -->
+  <section id="s7">
+    <h2><span class="sec-num">7</span> Information Collected After Approval</h2>
+    <p>Once an Application is approved and the Applicant becomes an authorised Cutzo Partner, Cutzo may process additional information, which may include:</p>
+    <ul>
+      <li>Shop information the Partner chooses to add or update, such as services offered, prices, opening hours/availability status, and shop images</li>
+      <li>Staff/Administrator information, where the Partner App allows the Owner to add authorised staff members to the account</li>
+      <li>Booking-related information necessary to manage appointments (see Section 8)</li>
+      <li>Account activity and usage information generated through the Partner's ordinary use of the app</li>
+    </ul>
+  </section>
+
+  <!-- Section 8 -->
+  <section id="s8">
+    <h2><span class="sec-num">8</span> Booking and OTP Information</h2>
+    <p>Once approved, a Partner may receive information through the Partner App to manage bookings made by Customers. Depending on the Partner App's actual functionality, this may include:</p>
+    <ul>
+      <li>A booking identifier</li>
+      <li>The Customer's name, to the extent displayed to the Partner</li>
+      <li>The service(s) selected by the Customer</li>
+      <li>The appointment date and time</li>
+      <li>Booking status (requested, accepted, started, completed, cancelled, or no-show)</li>
+      <li>OTP/check-in information used to verify the Customer's arrival for the booking</li>
+    </ul>
+    <p>The precise set of Customer data fields visible to a Partner: <span class="confirm">CONFIRM EXACT CUSTOMER DATA VISIBLE TO PARTNERS</span></p>
+    <p>The OTP itself is used solely to verify a Customer's arrival for, and to authorise the start of, the specific booking to which it relates. OTP storage and retention behaviour: <span class="confirm">CONFIRM OTP STORAGE AND RETENTION BEHAVIOUR</span></p>
+  </section>
+
+  <!-- Section 9 -->
+  <section id="s9">
+    <h2><span class="sec-num">9</span> Technical and Device Information</h2>
+    <p>Like most mobile and web applications, the Partner App may automatically process certain technical information necessary to operate, secure, and troubleshoot the service. This may include device information, operating system and app version, IP address, log information, crash/error information, network information, and other security-related information.</p>
+    <p>Exact technical and analytics data points collected: <span class="confirm">CONFIRM TECHNICAL/ANALYTICS DATA COLLECTED BY CUTZO</span></p>
+    <p><strong>Location Data:</strong> Where a Partner provides a Shop's address or location as part of the Shop's public profile, that address/location information is distinct from device-level GPS or continuous location tracking. If the Partner App requests device location permission for a specific feature, this should be described accurately.</p>
+    <p><span class="confirm">CONFIRM WHETHER DEVICE LOCATION PERMISSION IS USED, AND FOR WHAT PURPOSE</span></p>
+  </section>
+
+  <!-- Section 10 -->
+  <section id="s10">
+    <h2><span class="sec-num">10</span> How We Use Information</h2>
+    <p>Cutzo uses the information described in Sections 5 through 9 for the following purposes:</p>
+    <ul>
+      <li>Creating and managing Partner accounts</li>
+      <li>Processing and reviewing Partner Applications</li>
+      <li>Communicating with Applicants and Partners about their Application or account status</li>
+      <li>Conducting verification of Applicants and Shops, including physical verification where applicable</li>
+      <li>Approving or rejecting Applications</li>
+      <li>Operating and managing approved Partners' Shop profiles and listings</li>
+      <li>Managing and facilitating bookings between Partners and Customers</li>
+      <li>Facilitating Customer check-in and OTP verification for bookings</li>
+      <li>Providing Customer and Partner support</li>
+      <li>Preventing and detecting fraud, abuse, and misuse of the Platform</li>
+      <li>Maintaining the security and integrity of the Partner App and the Platform</li>
+      <li>Troubleshooting technical issues and maintaining/improving the Partner App</li>
+      <li>Complying with applicable legal obligations</li>
+      <li>Enforcing the Cutzo Partner Terms &amp; Conditions</li>
+      <li>Assisting with the resolution of disputes between Partners and Customers, or between Partners and Cutzo</li>
+    </ul>
+  </section>
+
+  <!-- Section 11 -->
+  <section id="s11">
+    <h2><span class="sec-num">11</span> Legal Grounds / Lawful Processing</h2>
+    <p>Cutzo processes personal information in accordance with the <strong>Digital Personal Data Protection Act, 2023 ("DPDP Act")</strong> and the Digital Personal Data Protection Rules, 2025, together with the Information Technology Act, 2000 and applicable rules made thereunder, and other applicable Indian data-protection and privacy requirements.</p>
+    <p>Cutzo's processing of Partner and Applicant information under this Policy is generally based on:</p>
+    <ul>
+      <li>The Applicant/Partner voluntarily providing information to apply for and operate as a Cutzo Partner;</li>
+      <li>The necessity of processing to perform the Cutzo Partner Terms &amp; Conditions; and</li>
+      <li>Compliance with Cutzo's legal obligations, where applicable.</li>
+    </ul>
+    <p>Legal classification: <span class="confirm">LEGAL CLASSIFICATION TO BE CONFIRMED BY CUTZO COUNSEL</span></p>
+  </section>
+
+  <!-- Section 12 -->
+  <section id="s12">
+    <h2><span class="sec-num">12</span> Information Sharing</h2>
+    <p><strong>Customers:</strong> Cutzo shares limited Partner/Shop information with Customers where it is intended to be part of the Shop's public profile on the Customer App (e.g., Shop name, address, services, prices, and images that the Partner has chosen to publish). Cutzo does not share all Partner account information with Customers.</p>
+    <p><strong>Service Providers:</strong> Cutzo may share information with third-party service providers that help operate the Platform, as described in Section 13.</p>
+    <p><strong>Legal Authorities:</strong> Cutzo may disclose information where required or permitted by Applicable Law, including in response to a valid legal process, government request, or where necessary to protect rights, property, or safety.</p>
+    <p><strong>Business Transactions:</strong> Information may be transferred as part of a merger, acquisition, corporate restructuring, or sale of business assets involving Cutzo, subject to appropriate protections and Applicable Law.</p>
+  </section>
+
+  <!-- Section 13 -->
+  <section id="s13">
+    <h2><span class="sec-num">13</span> Third-Party Service Providers</h2>
+    <p>Cutzo may use third-party service providers to help operate, host, and secure the Partner App and the wider Platform. Depending on Cutzo's actual technical architecture, this may include providers for functions such as authentication, hosting/backend infrastructure, database services, push/SMS notifications, payment processing, analytics, crash reporting, and security.</p>
+    <p>Confirmed list of third-party service providers and the categories of information each receives: <span class="confirm">THIRD-PARTY SERVICE PROVIDERS TO BE CONFIRMED</span></p>
+  </section>
+
+  <!-- Section 14 -->
+  <section id="s14">
+    <h2><span class="sec-num">14</span> Authentication Providers</h2>
+    <p>Where the Partner App offers sign-in through a third-party authentication provider (for example, Google authentication), Cutzo may receive limited information from that provider as part of the authentication process, such as a name, email address, and/or a unique account identifier.</p>
+    <p>Cutzo does not receive or store the Partner's password for the third-party authentication provider. Authentication credentials are handled directly between the Partner and the authentication provider.</p>
+    <p>Third-party authentication providers operate under their own privacy policies and terms of service, which Partners should review independently. Precise fields received from any authentication provider: <span class="confirm">TO BE CONFIRMED BY CUTZO</span></p>
+  </section>
+
+  <!-- Section 15 -->
+  <section id="s15">
+    <h2><span class="sec-num">15</span> Data Retention</h2>
+    <p>Cutzo retains personal information only for as long as reasonably necessary for the purposes described in this Policy, which may include managing Partner accounts, processing Applications, managing bookings, complying with legal obligations, resolving disputes, preventing fraud, and maintaining necessary business records.</p>
+    <p>Specific retention periods:</p>
+    <ul>
+      <li>Registration/Application data: <span class="confirm">RETENTION PERIOD TO BE CONFIRMED</span></li>
+      <li>Approved-Partner account data: <span class="confirm">RETENTION PERIOD TO BE CONFIRMED</span></li>
+      <li>Booking records: <span class="confirm">RETENTION PERIOD TO BE CONFIRMED</span></li>
+      <li>OTP/check-in data: <span class="confirm">RETENTION PERIOD TO BE CONFIRMED</span></li>
+    </ul>
+  </section>
+
+  <!-- Section 16 -->
+  <section id="s16">
+    <h2><span class="sec-num">16</span> Data Security</h2>
+    <p>Cutzo implements reasonable technical and organisational measures designed to protect personal information processed through the Partner App, which may include:</p>
+    <ul>
+      <li>Access controls limiting who can view Partner and Customer information</li>
+      <li>Authentication requirements for accessing accounts and internal systems</li>
+      <li>Encryption of data where implemented</li>
+      <li>Use of secure infrastructure for hosting and storage</li>
+      <li>Logging and monitoring of system activity</li>
+      <li>Restricting employee and vendor access on a need-to-know basis</li>
+      <li>Periodic security testing</li>
+      <li>An incident-response process for handling suspected security issues</li>
+    </ul>
+    <p>No method of transmission or storage is completely secure, and Cutzo does not claim that the Partner App is 100% immune from unauthorised access. Actual security measures to be confirmed: <span class="confirm">TO BE CONFIRMED BY CUTZO</span></p>
+  </section>
+
+  <!-- Section 17 -->
+  <section id="s17">
+    <h2><span class="sec-num">17</span> Data Breach / Security Incidents</h2>
+    <p>If Cutzo becomes aware of a personal-data security incident that is likely to significantly affect Partners or Customers, Cutzo will take appropriate steps to investigate and address the incident, consistent with its obligations under the DPDP Act, the Information Technology Act, 2000, and other Applicable Law.</p>
+    <p>Where legally required, Cutzo may notify affected individuals and/or the relevant regulatory authority (including the Data Protection Board of India, once its relevant powers are in force, and/or the Indian Computer Emergency Response Team (CERT-In) where its reporting requirements apply).</p>
+  </section>
+
+  <!-- Section 18 -->
+  <section id="s18">
+    <h2><span class="sec-num">18</span> Partner Privacy Rights</h2>
+    <p>Under the DPDP Act, as its provisions come into force in phases, a Data Principal (an individual Applicant or Partner whose personal data Cutzo processes) may have rights that include, subject to the conditions and limitations set out in the Act:</p>
+    <ul>
+      <li>The right to obtain a summary of the personal data being processed by Cutzo and the processing activities undertaken</li>
+      <li>The right to correction, completion, and updating of inaccurate or incomplete personal data</li>
+      <li>The right to erasure of personal data that is no longer necessary for the purpose for which it was processed</li>
+      <li>The right to grievance redressal, as described in Section 20</li>
+      <li>The right to nominate another individual to exercise these rights on the Data Principal's behalf, in the event of death or incapacity</li>
+    </ul>
+    <p>These rights may be subject to reasonable exceptions and limitations under Applicable Law, for example where information must be retained to comply with a legal obligation or to establish or defend a legal claim.</p>
+  </section>
+
+  <!-- Section 19 -->
+  <section id="s19">
+    <h2><span class="sec-num">19</span> Consent and Withdrawal</h2>
+    <p>Where Cutzo's processing of a Partner's or Applicant's personal information is based on consent, that consent may generally be withdrawn at any time, using the mechanism made available through the Partner App or by contacting Cutzo using the details in Section 28.</p>
+    <p>Withdrawing consent does not affect the lawfulness of processing carried out before withdrawal. Withdrawal of consent does not necessarily mean that Cutzo will immediately delete every record — some processing may lawfully continue where it is necessary to comply with a legal obligation, resolve an ongoing dispute, or where another lawful basis applies.</p>
+  </section>
+
+  <!-- Section 20 -->
+  <section id="s20">
+    <h2><span class="sec-num">20</span> Grievance Redressal</h2>
+    <p>If a Partner or Applicant has a concern, question, or complaint about how their personal information is processed, they may contact Cutzo using the details below. Cutzo will acknowledge and address privacy-related grievances within the timelines required under Applicable Law.</p>
+    <div class="contact-row" style="margin-top:12px;">
+      <div class="contact-item"><strong>Privacy Contact:</strong> <span class="confirm">TO BE PROVIDED</span></div>
+      <div class="contact-item"><strong>Grievance Officer:</strong> <span class="confirm">TO BE PROVIDED IF APPLICABLE</span></div>
+      <div class="contact-item"><strong>Email:</strong> <a href="mailto:support@cutzolife.in">support@cutzolife.in</a></div>
+      <div class="contact-item"><strong>Phone:</strong> <span class="confirm">TO BE PROVIDED</span></div>
+    </div>
+    <p style="margin-top:12px;">If a complainant remains unsatisfied, they may separately have the right to approach the Data Protection Board of India, once its relevant powers are in force under the DPDP Act, or another competent authority under Applicable Law.</p>
+  </section>
+
+  <!-- Section 21 -->
+  <section id="s21">
+    <h2><span class="sec-num">21</span> Children's Data</h2>
+    <p>The Cutzo Partner App is intended for use by salon/barber-shop owners and their authorised adult representatives; it is a business-user application and is not directed at, or designed for, children.</p>
+    <p>Cutzo does not knowingly or intentionally collect personal data of a child (as defined under the DPDP Act) through the Partner App as part of its ordinary Application, verification, or Partner-operation processes. If Cutzo becomes aware that it has inadvertently collected personal data of a child, it will take appropriate steps to address the situation in accordance with Applicable Law.</p>
+  </section>
+
+  <!-- Section 22 -->
+  <section id="s22">
+    <h2><span class="sec-num">22</span> International Data Transfers</h2>
+    <p>Personal information collected through the Partner App may be stored and processed on servers and by service providers located in India and, depending on Cutzo's actual technical architecture, potentially in other countries. The DPDP Act permits the transfer of personal data outside India except to countries specifically restricted by the Central Government; any such transfer would be carried out consistently with the DPDP Act and applicable rules.</p>
+    <p>Actual data-storage locations and whether cross-border data transfer occurs: <span class="confirm">CONFIRM DATA STORAGE LOCATIONS AND INTERNATIONAL TRANSFERS</span></p>
+  </section>
+
+  <!-- Section 23 -->
+  <section id="s23">
+    <h2><span class="sec-num">23</span> Marketing Communications</h2>
+    <p>Cutzo distinguishes between two categories of communications sent to Partners:</p>
+    <ul>
+      <li><strong>Transactional/operational communications</strong> — for example, Application-status updates, booking-related notifications, account and security notifications, and OTP/check-in related messages. These are a necessary part of using the Partner App and are sent regardless of any separate marketing preference.</li>
+      <li><strong>Marketing communications</strong> — for example, promotions, information about new features, offers, or campaigns. Cutzo does not treat acceptance of this Policy or the Terms as automatic consent to receive marketing communications where separate consent is required under Applicable Law.</li>
+    </ul>
+    <p>If Cutzo's actual marketing practices differ from the above: <span class="confirm">TO BE CONFIRMED BY CUTZO</span></p>
+  </section>
+
+  <!-- Section 24 -->
+  <section id="s24">
+    <h2><span class="sec-num">24</span> Partner Responsibilities Regarding Customer Data</h2>
+    <p>When a Partner receives Customer information through the Partner App in order to fulfil a booking (see Section 8), the Partner must:</p>
+    <ul>
+      <li>Use that information only for the legitimate purpose of fulfilling the specific booking or Service to which it relates</li>
+      <li>Take reasonable steps to protect that information from unauthorised access, disclosure, or loss</li>
+      <li>Not sell that information to any third party</li>
+      <li>Not otherwise misuse that information</li>
+      <li>Not use a Customer's contact information obtained through the Platform for unauthorised marketing</li>
+      <li>Not share that information with any third party except as necessary to fulfil the booking, or as required by Applicable Law</li>
+      <li>Follow Cutzo's policies and Applicable Law, including the DPDP Act, in respect of any Customer information the Partner receives</li>
+    </ul>
+    <p>The precise legal relationship between Cutzo and a Partner with respect to Customer data: <span class="confirm">LEGAL CLASSIFICATION TO BE CONFIRMED BY CUTZO COUNSEL</span></p>
+  </section>
+
+  <!-- Section 25 -->
+  <section id="s25">
+    <h2><span class="sec-num">25</span> Third-Party Links</h2>
+    <p>The Partner App may, in some places, contain links to third-party websites or services. This Policy does not describe the privacy practices of third-party websites or services; where the Partner App links to a third party's website or service, that third party's own privacy policy and terms will govern its practices.</p>
+    <p>Third-party links currently present in the Partner App: <span class="confirm">TO BE CONFIRMED BY CUTZO</span></p>
+  </section>
+
+  <!-- Section 26 -->
+  <section id="s26">
+    <h2><span class="sec-num">26</span> Changes to This Privacy Policy</h2>
+    <p>Cutzo may update this Privacy Policy from time to time. Each version will show its Effective Date and Last Updated date. Where a change is material, Cutzo will endeavour to provide reasonable notice to Partners through the Partner App, email, or other reasonable means before the change takes effect.</p>
+    <p>Continued use of the Partner App after the effective date of an updated Policy constitutes acceptance of the update.</p>
+  </section>
+
+  <!-- Section 27 -->
+  <section id="s27">
+    <h2><span class="sec-num">27</span> Governing Law</h2>
+    <p>This Privacy Policy is governed by the laws of India, including the Digital Personal Data Protection Act, 2023, the Information Technology Act, 2000, and applicable rules made thereunder. Subject to any statutory or regulatory mechanism that applies independently (including the Data Protection Board of India, once its relevant powers are in force), disputes relating to this Policy will be subject to the jurisdiction of the courts at <span class="confirm">COURTS / JURISDICTION TO BE CONFIRMED</span>.</p>
+  </section>
+
+  <!-- Section 28 -->
+  <section id="s28">
+    <div class="contact-card">
+      <h3>28. Contact Us</h3>
+      <p>If you have questions, concerns, or requests relating to this Privacy Policy or Cutzo's handling of your personal information, please contact us:</p>
+      <div class="contact-row" style="margin-top:14px;">
+        <div class="contact-item"><strong>Legal Entity:</strong> <span class="confirm">TO BE PROVIDED</span></div>
+        <div class="contact-item"><strong>Registered Office:</strong> <span class="confirm">TO BE PROVIDED</span></div>
+        <div class="contact-item"><strong>Privacy Email:</strong> <a href="mailto:support@cutzolife.in">support@cutzolife.in</a></div>
+        <div class="contact-item"><strong>Grievance Email:</strong> <a href="mailto:support@cutzolife.in">support@cutzolife.in</a></div>
+        <div class="contact-item"><strong>Phone:</strong> <span class="confirm">TO BE PROVIDED</span></div>
+        <div class="contact-item"><strong>Grievance Officer:</strong> <span class="confirm">TO BE PROVIDED IF APPLICABLE</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 29 -->
+  <section id="s29" style="margin-top:40px;">
+    <h2><span class="sec-num">29</span> Information Cutzo Must Provide Before Publication</h2>
+    <div class="checklist">
+      <h3>⚠ Open Items — Must Be Confirmed Before Publishing</h3>
+      <ul>
+        <li>Exact fields collected during initial Partner registration (Section 5)</li>
+        <li>Exact information typically requested during Partner verification (Section 6)</li>
+        <li>Exact Customer data fields visible to Partners through the Partner App (Section 8)</li>
+        <li>OTP storage and retention behaviour (Section 8)</li>
+        <li>Exact technical/device data and analytics tools actually used (Section 9)</li>
+        <li>Whether device location permission is used, and for what specific purpose (Section 9)</li>
+        <li>Cutzo's confirmed legal classification (e.g., Data Fiduciary) per counsel's analysis (Sections 3, 11, 24)</li>
+        <li>The confirmed list of third-party service providers and categories of data each receives (Section 13)</li>
+        <li>Confirmed details of any third-party authentication provider(s) actually integrated (Section 14)</li>
+        <li>Specific data-retention periods for each category of information (Section 15)</li>
+        <li>Confirmation of the actual security measures implemented (Section 16)</li>
+        <li>Applicable data-breach notification timeline(s) under Applicable Law (Section 17)</li>
+        <li>Confirmed data storage locations and whether any cross-border data transfer occurs (Section 22)</li>
+        <li>Confirmation of Cutzo's actual marketing communication practices toward Partners (Section 23)</li>
+        <li>Any third-party links actually present in the Partner App (Section 25)</li>
+        <li>Privacy Contact and Grievance Officer name/title, email, and phone number (Sections 20, 28)</li>
+        <li>Cutzo's legal entity name and registered office address (Sections 3, 28)</li>
+        <li>Jurisdiction city/state for the governing-law clause (Section 27)</li>
+        <li>Effective Date, Last Updated date, and version number for this Policy</li>
+        <li>Link to Cutzo's Customer-facing Privacy Policy, if this Partner Policy should cross-reference it (Section 2)</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Section 30 -->
+  <section id="s30">
+    <h2><span class="sec-num">30</span> Final Legal Review Note</h2>
+    <div class="legal-note">
+      This Privacy Policy is an AI-assisted drafting document and should be reviewed and approved by a qualified privacy/data-protection lawyer in India before publication or reliance. It must not be published with any of the above open items left unconfirmed, as doing so risks making inaccurate representations about Cutzo's actual data practices.
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2026 Cutzo Life. All rights reserved. Cutzo Partner Platform.<br>
+    This document is a draft and must not be published without qualified legal review.
+  </footer>
+
+</div>
+</body>
+</html>

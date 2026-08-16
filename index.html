@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+
+  <!-- Primary SEO -->
+  <title>Cutzo Life – Salon Booking App | Book Barber Shops Near You</title>
+
+  <meta name="description"
+    content="Cutzo Life is a salon booking app that helps you discover nearby barber shops, explore services and prices, and book appointments easily." />
+
+  <meta name="robots" content="index, follow" />
+
+  <link rel="canonical" href="https://cutzolife.in/" />
+
+  <!-- Content Security Policy — restricts script injection and network targets -->
+  <!-- Note: fonts.googleapis.com and fonts.gstatic.com removed — fonts are now self-hosted via @fontsource (bundled in APK) -->
+  <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self' capacitor: http://localhost:*;
+        script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.convex.cloud https://*.googleapis.com https://*.firebase.com https://apis.google.com https://checkout.razorpay.com https://*.razorpay.com capacitor: http://localhost:*;
+        style-src 'self' 'unsafe-inline' capacitor: http://localhost:*;
+        font-src 'self' data: capacitor: http://localhost:*;
+        img-src 'self' data: blob: https://*.convex.cloud https://*.firebase.com https://*.googleusercontent.com https://images.unsplash.com https://*.razorpay.com capacitor: http://localhost:*;
+        connect-src 'self' https://*.convex.cloud wss://*.convex.cloud https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://*.googleapis.com https://*.firebase.com https://nominatim.openstreetmap.org https://fcm.googleapis.com https://graph.facebook.com https://*.razorpay.com https://api.razorpay.com capacitor: http://localhost:*;
+        frame-src 'self' https://*.firebaseapp.com https://*.firebase.com https://api.razorpay.com https://checkout.razorpay.com;
+      " />
+
+  <!-- Razorpay -->
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+  <!-- PWA / Mobile -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="CUTZO" />
+
+  <link rel="manifest" href="/manifest.webmanifest" />
+
+  <!-- Icons -->
+  <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+  <link rel="apple-touch-icon" href="/icon.svg" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Cutzo Life – Salon Booking App" />
+
+  <meta property="og:description"
+    content="Discover nearby barber shops, explore services and prices, and book your appointment with Cutzo Life." />
+
+  <meta property="og:type" content="website" />
+
+  <meta property="og:url" content="https://cutzolife.in/" />
+
+  <meta property="og:image" content="https://cutzolife.in/icon.svg" />
+
+  <meta property="og:site_name" content="Cutzo Life" />
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <meta name="twitter:title" content="Cutzo Life – Salon Booking App" />
+
+  <meta name="twitter:description"
+    content="Discover nearby barber shops, explore services and prices, and book your appointment with Cutzo Life." />
+
+  <meta name="twitter:image" content="https://cutzolife.in/icon.svg" />
+
+  <!--
+      Structured Data
+      Helps search engines understand:
+      Cutzo = brand
+      Cutzo Life = website/application
+    -->
+  <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://cutzolife.in/#organization",
+            "name": "Cutzo",
+            "url": "https://cutzolife.in/",
+            "logo": "https://cutzolife.in/icon.svg",
+            "founder": [
+              {
+                "@type": "Person",
+                "@id": "https://cutzolife.in/team/pavan-u-g#person",
+                "name": "Pavan U G",
+                "jobTitle": "Co-Founder",
+                "url": "https://cutzolife.in/team/pavan-u-g"
+              },
+              {
+                "@type": "Person",
+                "@id": "https://cutzolife.in/team/mohammed-nadeem#person",
+                "name": "Mohammed Nadeem",
+                "jobTitle": "Co-Founder",
+                "url": "https://cutzolife.in/team/mohammed-nadeem"
+              }
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://cutzolife.in/#website",
+            "url": "https://cutzolife.in/",
+            "name": "Cutzo Life",
+            "alternateName": "Cutzo",
+            "publisher": {
+              "@id": "https://cutzolife.in/#organization"
+            }
+          },
+          {
+            "@type": "SoftwareApplication",
+            "name": "Cutzo Life",
+            "applicationCategory": "LifestyleApplication",
+            "operatingSystem": "Android",
+            "url": "https://cutzolife.in/",
+            "description": "Cutzo Life is a salon booking app that helps users discover barber shops, explore services and book appointments."
+          }
+        ]
+      }
+    </script>
+
+  <style>
+    /* Eliminate white/color flash while JS parses and React mounts.
+         Must match the exact start color of the splash screen gradient. */
+    html,
+    body {
+      background-color: #5B21B6;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    #root {
+      background-color: #5B21B6;
+      height: 100%;
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="root"></div>
+
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+
+</html>

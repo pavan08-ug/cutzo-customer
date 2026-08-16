@@ -1,0 +1,9 @@
+{
+  "cleanUrls": true,
+  "rewrites": [
+    {
+      "source": "/((?!terms\\.html|privacy\\.html|team.*|.*\\..*).*)",
+      "destination": "/index.html"
+    }
+  ]
+}

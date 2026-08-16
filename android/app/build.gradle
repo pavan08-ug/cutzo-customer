@@ -1,0 +1,100 @@
+apply plugin: 'com.android.application'
+
+import groovy.json.JsonSlurper
+
+def getAppVersion() {
+    def inputFile = new File("$rootDir/../package.json")
+    if (inputFile.exists()) {
+        def packageJson = new JsonSlurper().parseText(inputFile.text)
+        return packageJson["version"] ?: "1.0.0"
+    }
+    return "1.0.0"
+}
+
+def getVersionCode(String version) {
+    try {
+        def parts = version.split('\\.')
+        def major = parts[0].toInteger()
+        def minor = parts[1].toInteger()
+        def patch = parts[2].toInteger()
+        if (major == 1 && minor == 0) {
+            return patch + 4
+        }
+        return major * 10000 + minor * 100 + patch
+    } catch (Exception e) {
+        return 6
+    }
+}
+
+def appVersionName = getAppVersion()
+def appVersionCode = getVersionCode(appVersionName)
+
+android {
+    namespace = "com.cutzo.app"
+    compileSdk = rootProject.ext.compileSdkVersion
+    defaultConfig {
+        applicationId "com.cutzo.app"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode appVersionCode
+        versionName appVersionName
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        aaptOptions {
+             // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.
+             // Default: https://android.googlesource.com/platform/frameworks/base/+/282e181b58cf72b6ca770dc7ca5f91f135444502/tools/aapt/AaptAssets.cpp#61
+            ignoreAssetsPattern = '!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~'
+        }
+    }
+    signingConfigs {
+        release {
+            storeFile file("cutzo-release-key.keystore")
+            storePassword "cutzo12345"
+            keyAlias "cutzo"
+            keyPassword "cutzo12345"
+        }
+    }
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+repositories {
+    flatDir{
+        dirs '../capacitor-cordova-android-plugins/src/main/libs', 'libs'
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "androidx.appcompat:appcompat:$androidxAppCompatVersion"
+    implementation "androidx.coordinatorlayout:coordinatorlayout:$androidxCoordinatorLayoutVersion"
+    implementation "androidx.core:core-splashscreen:$coreSplashScreenVersion"
+    implementation project(':capacitor-android')
+    testImplementation "junit:junit:$junitVersion"
+    androidTestImplementation "androidx.test.ext:junit:$androidxJunitVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$androidxEspressoCoreVersion"
+    implementation project(':capacitor-cordova-android-plugins')
+    
+    // Import the Firebase BoM
+    implementation platform('com.google.firebase:firebase-bom:34.11.0')
+    
+    // Firebase dependencies
+    implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-auth'
+    implementation 'com.google.firebase:firebase-messaging'
+}
+
+apply from: 'capacitor.build.gradle'
+
+try {
+    def servicesJSON = file('google-services.json')
+    if (servicesJSON.text) {
+        apply plugin: 'com.google.gms.google-services'
+    }
+} catch(Exception e) {
+    logger.info("google-services.json not found, google-services plugin not applied. Push Notifications won't work")
+}
