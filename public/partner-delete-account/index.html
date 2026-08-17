@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Account & Data Deletion - Cutzo Partner</title>
+  <meta name="description" content="Request account and personal data deletion for Cutzo Partner app. Learn about our deletion process, data retention policies, and steps to delete your account.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #7c4dff;
+      --primary-light: #9c6dff;
+      --primary-glow: rgba(124, 77, 255, 0.2);
+      --bg: #0b0f19;
+      --card-bg: #151c2c;
+      --card-border: #232d42;
+      --section-bg: rgba(255,255,255,0.025);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-sub: #cbd5e1;
+      --green: #10b981;
+      --warn: #f59e0b;
+      --danger: #ef4444;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.7;
+      padding: 32px 16px;
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 44px;
+      box-shadow: 0 24px 48px -16px rgba(0,0,0,0.6), 0 0 40px var(--primary-glow);
+    }
+    header { border-bottom: 1px solid var(--card-border); padding-bottom: 28px; margin-bottom: 32px; }
+    .badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--primary-glow); color: #b388ff;
+      font-size: 11px; font-weight: 700; padding: 5px 14px;
+      border-radius: 20px; text-transform: uppercase; letter-spacing: 0.6px;
+      margin-bottom: 16px; border: 1px solid rgba(124,77,255,0.3);
+    }
+    h1 { font-size: 28px; font-weight: 800; color: var(--text-main); margin-bottom: 8px; letter-spacing: -0.5px; }
+    .meta-info {
+      display: flex; flex-wrap: wrap; gap: 16px;
+      font-size: 13.5px; color: var(--text-muted); margin-top: 10px;
+    }
+    .meta-info span { display: inline-flex; align-items: center; gap: 6px; }
+    .meta-info strong { color: var(--text-sub); }
+
+    .intro-banner {
+      background: rgba(239, 68, 68, 0.08);
+      border: 1px solid rgba(239, 68, 68, 0.25);
+      border-radius: 14px;
+      padding: 20px 24px;
+      margin-bottom: 36px;
+      font-size: 14px;
+      color: #fca5a5;
+    }
+    .intro-banner strong { color: #ffffff; }
+
+    section { margin-bottom: 36px; }
+    h2 {
+      font-size: 18px; font-weight: 700; color: var(--text-main);
+      margin-bottom: 16px; display: flex; align-items: center; gap: 10px;
+    }
+    h2 span.sec-num {
+      background: var(--primary); color: #fff;
+      font-size: 11px; font-weight: 800;
+      min-width: 28px; height: 26px; border-radius: 8px;
+      display: inline-flex; align-items: center; justify-content: center;
+      flex-shrink: 0; padding: 0 6px;
+    }
+    p { font-size: 14.5px; color: var(--text-sub); margin-bottom: 14px; }
+    ul, ol { padding-left: 22px; margin-bottom: 14px; }
+    li { font-size: 14px; color: var(--text-sub); margin-bottom: 8px; }
+    strong { color: var(--text-main); }
+    a { color: #b388ff; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* Steps Cards */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .step-card {
+      background: var(--section-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 20px;
+      position: relative;
+    }
+    .step-badge {
+      display: inline-block;
+      background: rgba(124, 77, 255, 0.15);
+      color: #c4b5fd;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    .step-card h3 { font-size: 15px; font-weight: 700; color: #ffffff; margin-bottom: 8px; }
+    .step-card p { font-size: 13.5px; color: var(--text-muted); margin-bottom: 0; }
+
+    /* Table */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0 24px 0;
+      font-size: 13.5px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--card-border);
+    }
+    .data-table th, .data-table td {
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--card-border);
+    }
+    .data-table th {
+      background: rgba(255,255,255,0.04);
+      color: #ffffff;
+      font-weight: 600;
+    }
+    .data-table td {
+      color: var(--text-sub);
+    }
+    .tag-delete {
+      display: inline-block;
+      background: rgba(239, 68, 68, 0.15);
+      color: #f87171;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 11.5px;
+      font-weight: 600;
+    }
+    .tag-retain {
+      display: inline-block;
+      background: rgba(245, 158, 11, 0.15);
+      color: #fbbf24;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 11.5px;
+      font-weight: 600;
+    }
+
+    /* Request Form */
+    .form-container {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      padding: 24px;
+      margin-top: 16px;
+    }
+    .form-group {
+      margin-bottom: 16px;
+    }
+    .form-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-sub);
+      margin-bottom: 6px;
+    }
+    .form-control {
+      width: 100%;
+      background: #0d121f;
+      border: 1px solid #2d3748;
+      border-radius: 10px;
+      padding: 11px 14px;
+      color: #ffffff;
+      font-size: 14px;
+      font-family: inherit;
+    }
+    .form-control:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(124, 77, 255, 0.25);
+    }
+    .btn-submit {
+      background: #dc2626;
+      color: #ffffff;
+      border: none;
+      border-radius: 10px;
+      padding: 12px 24px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.2s;
+    }
+    .btn-submit:hover {
+      background: #b91c1c;
+    }
+
+    /* Contact Card */
+    .contact-card {
+      background: rgba(124,77,255,0.07);
+      border: 1px solid rgba(124,77,255,0.25);
+      border-radius: 16px;
+      padding: 24px;
+      margin-top: 32px;
+    }
+    .contact-card h3 { font-size: 15px; font-weight: 700; color: var(--text-main); margin-bottom: 12px; }
+    .contact-row { display: flex; flex-direction: column; gap: 8px; font-size: 13.5px; }
+
+    footer {
+      border-top: 1px solid var(--card-border);
+      padding-top: 24px;
+      margin-top: 40px;
+      font-size: 12.5px;
+      color: var(--text-muted);
+      text-align: center;
+    }
+    @media (max-width: 640px) {
+      .container { padding: 24px 18px; border-radius: 16px; }
+      h1 { font-size: 22px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="badge">Google Play Data Safety & User Rights</div>
+      <h1>Account & Data Deletion Request</h1>
+      <div class="meta-info">
+        <span><strong>Application:</strong> Cutzo Partner</span>
+        <span><strong>Developer:</strong> Cutzo (Cutzo Life)</span>
+        <span><strong>Last Updated:</strong> August 2026</span>
+      </div>
+    </header>
+
+    <div class="intro-banner">
+      <strong>Notice for Cutzo Partner Users:</strong> You have the right to request the complete deletion of your Cutzo Partner account and associated business data at any time. This page provides full instructions and an online request mechanism compliant with Google Play Store User Data Policies.
+    </div>
+
+    <!-- Section 1: How to Request Deletion -->
+    <section>
+      <h2><span class="sec-num">1</span> How to Request Account Deletion</h2>
+      <p>Partners can submit an account deletion request through any of the following methods:</p>
+
+      <div class="steps-grid">
+        <div class="step-card">
+          <span class="step-badge">Method 1: In-App</span>
+          <h3>Within the Partner App</h3>
+          <p>1. Open the <strong>Cutzo Partner</strong> app.<br>
+             2. Go to <strong>Profile / Settings</strong>.<br>
+             3. Tap <strong>Account Security</strong> &rarr; <strong>Delete Account</strong>.<br>
+             4. Confirm with OTP verification.</p>
+        </div>
+
+        <div class="step-card">
+          <span class="step-badge">Method 2: Online Request</span>
+          <h3>Direct Web Submission</h3>
+          <p>Fill out the official request form below on this page with your registered mobile number and business name. Our team will verify and process your request within 48 hours.</p>
+        </div>
+
+        <div class="step-card">
+          <span class="step-badge">Method 3: Email / Helpdesk</span>
+          <h3>Email Our Support</h3>
+          <p>Send an email to <a href="mailto:support@cutzolife.in?subject=Partner%20Account%20Deletion%20Request">support@cutzolife.in</a> with your registered mobile number and salon name.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: Online Request Form -->
+    <section>
+      <h2><span class="sec-num">2</span> Submit Online Deletion Request</h2>
+      <p>If you have uninstalled the app or cannot access your account, use this form to initiate deletion directly:</p>
+
+      <div class="form-container">
+        <form id="deleteForm" onsubmit="handleSubmit(event)">
+          <div class="form-group">
+            <label for="phone">Registered Mobile Number *</label>
+            <input type="tel" id="phone" class="form-control" placeholder="e.g. +91 9876543210" required>
+          </div>
+          <div class="form-group">
+            <label for="shopName">Salon / Barbershop Name *</label>
+            <input type="text" id="shopName" class="form-control" placeholder="e.g. Royal Unisex Salon" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Registered Email Address (Optional)</label>
+            <input type="email" id="email" class="form-control" placeholder="e.g. owner@example.com">
+          </div>
+          <div class="form-group">
+            <label for="reason">Reason for Deletion (Optional)</label>
+            <select id="reason" class="form-control">
+              <option value="Closing business">Closing business / salon</option>
+              <option value="Switching to another platform">Switching to another platform</option>
+              <option value="Privacy concerns">Privacy concerns</option>
+              <option value="Duplicate account">Duplicate account</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <button type="submit" class="btn-submit">
+            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+            Send Deletion Request
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Section 3: Data Deletion & Retention Breakdown -->
+    <section>
+      <h2><span class="sec-num">3</span> Data Deletion vs. Retention Details</h2>
+      <p>In accordance with Google Play developer policies and applicable privacy regulations, here is what happens to your data upon account deletion:</p>
+
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Data Category</th>
+            <th>Action</th>
+            <th>Details & Retention Policy</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Shop Profile & Catalogue</strong><br><small>Salon name, photos, address, services, prices</small></td>
+            <td><span class="tag-delete">Deleted</span></td>
+            <td>Permanently removed from active servers and public customer search immediately. Scrubbed from backups within 30 days.</td>
+          </tr>
+          <tr>
+            <td><strong>Partner Identity & Auth</strong><br><small>Name, phone number, OAuth tokens, staff logins</small></td>
+            <td><span class="tag-delete">Deleted</span></td>
+            <td>Account credentials and staff association links are permanently purged within 30 days.</td>
+          </tr>
+          <tr>
+            <td><strong>Device & Notification Data</strong><br><small>FCM tokens, notification history, session logs</small></td>
+            <td><span class="tag-delete">Deleted</span></td>
+            <td>Purged immediately upon account deactivation.</td>
+          </tr>
+          <tr>
+            <td><strong>Financial & Invoicing Records</strong><br><small>Platform payout history, commission invoices, GST receipts</small></td>
+            <td><span class="tag-retain">Retained</span></td>
+            <td>Retained strictly for legal, tax, and regulatory compliance under Indian financial laws (up to statutory limitation periods), isolated in encrypted audit storage. Not used for marketing or profiling.</td>
+          </tr>
+          <tr>
+            <td><strong>Dispute & Grievance Logs</strong><br><small>Unresolved customer refunds or support tickets</small></td>
+            <td><span class="tag-retain">Retained</span></td>
+            <td>Retained temporarily until existing claims or chargebacks are legally concluded.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Section 4: Timeline -->
+    <section>
+      <h2><span class="sec-num">4</span> Processing Timeline</h2>
+      <ul>
+        <li><strong>Immediate (0 - 24 hours):</strong> Your salon listing is deactivated and removed from the customer marketplace. You will no longer receive bookings or customer inquiries.</li>
+        <li><strong>Verification (24 - 48 hours):</strong> Our support team verifies the account to ensure no pending payout or active dispute is unresolved.</li>
+        <li><strong>Permanent Purge (Within 30 days):</strong> All personal and salon profile data is irreversibly wiped from active databases and database backups.</li>
+      </ul>
+    </section>
+
+    <!-- Contact & Grievance -->
+    <div class="contact-card">
+      <h3>Need Assistance with Account Deletion?</h3>
+      <div class="contact-row">
+        <div><strong>Support Email:</strong> <a href="mailto:support@cutzolife.in">support@cutzolife.in</a></div>
+        <div><strong>WhatsApp Support:</strong> <a href="https://wa.me/919164228596" target="_blank">+91 91642 28596</a></div>
+        <div><strong>Developer:</strong> Cutzo Life (Cutzo)</div>
+        <div><strong>Privacy Policy:</strong> <a href="/partner-privacy.html">Cutzo Partner Privacy Policy</a></div>
+      </div>
+    </div>
+
+    <footer>
+      &copy; 2026 Cutzo (Cutzo Life). All rights reserved. &bull; <a href="/partner-privacy.html">Partner Privacy Policy</a> &bull; <a href="/partner-terms.html">Partner Terms</a>
+    </footer>
+  </div>
+
+  <script>
+    function handleSubmit(e) {
+      e.preventDefault();
+      const phone = document.getElementById('phone').value;
+      const shop = document.getElementById('shopName').value;
+      const email = document.getElementById('email').value;
+      const reason = document.getElementById('reason').value;
+
+      const subject = encodeURIComponent('Cutzo Partner Account Deletion Request - ' + shop);
+      const body = encodeURIComponent(
+        'Dear Cutzo Support Team,\n\n' +
+        'I would like to request the permanent deletion of my Cutzo Partner account and associated salon data.\n\n' +
+        'Account Details:\n' +
+        '- Registered Mobile Number: ' + phone + '\n' +
+        '- Salon / Shop Name: ' + shop + '\n' +
+        '- Registered Email: ' + (email || 'N/A') + '\n' +
+        '- Reason: ' + reason + '\n\n' +
+        'Please confirm once the deletion process is initiated.\n\n' +
+        'Thank you.'
+      );
+
+      window.location.href = 'mailto:support@cutzolife.in?subject=' + subject + '&body=' + body;
+    }
+  </script>
+</body>
+</html>

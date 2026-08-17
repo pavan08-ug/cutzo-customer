@@ -2,7 +2,7 @@
   "cleanUrls": true,
   "rewrites": [
     {
-      "source": "/((?!terms\\.html|privacy\\.html|team.*|.*\\..*).*)",
+      "source": "/((?!terms.*|privacy.*|partner-.*|delete-account.*|team.*|.*\\..*).*)",
       "destination": "/index.html"
     }
   ]

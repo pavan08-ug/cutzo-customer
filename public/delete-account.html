@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Account & Data Deletion - Cutzo</title>
+  <meta name="description" content="Request account and data deletion for Cutzo users and partners.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #7c4dff;
+      --bg: #0b0f19;
+      --card-bg: #151c2c;
+      --card-border: #232d42;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-sub: #cbd5e1;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 24px;
+    }
+    .card {
+      max-width: 600px;
+      width: 100%;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 36px;
+      text-align: center;
+    }
+    h1 { font-size: 24px; margin-bottom: 12px; }
+    p { color: var(--text-sub); font-size: 14.5px; margin-bottom: 24px; }
+    .btn-group { display: flex; flex-direction: column; gap: 12px; }
+    .btn {
+      display: block;
+      padding: 14px 20px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+    .btn-partner {
+      background: #7c4dff;
+      color: #fff;
+    }
+    .btn-partner:hover { background: #6b3ee6; }
+    .btn-customer {
+      background: rgba(255,255,255,0.06);
+      color: #cbd5e1;
+      border: 1px solid var(--card-border);
+    }
+    .btn-customer:hover { background: rgba(255,255,255,0.1); color: #fff; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Account & Data Deletion</h1>
+    <p>Please select the Cutzo service for which you wish to request account and data deletion:</p>
+    <div class="btn-group">
+      <a href="/partner-delete-account.html" class="btn btn-partner">Cutzo Partner App (Salon & Partner Accounts) &rarr;</a>
+      <a href="mailto:support@cutzolife.in?subject=Customer%20Account%20Deletion%20Request" class="btn btn-customer">Cutzo Customer App (User Bookings) &rarr;</a>
+    </div>
+  </div>
+</body>
+</html>
